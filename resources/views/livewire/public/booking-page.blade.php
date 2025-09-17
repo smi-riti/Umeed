@@ -80,74 +80,171 @@
                 <span class="text-sm font-semibold text-[#a53692] tracking-wider uppercase">Schedule Now</span>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-6">Online Appointment Request</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Complete the form below and we'll contact you within 24 hours to confirm your appointment
+                    Complete the steps below and we'll contact you within 24 hours to confirm your appointment
                 </p>
             </div>
             
-            <div class="bg-white rounded-lg p-8">
-                <form class="space-y-6">
-                    <!-- Personal Information -->
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Personal Information</h3>
+            <div class="bg-white rounded-lg p-8 shadow-md">
+                <!-- Progress Steps -->
+                <div class="mb-10 relative">
+                    <!-- Progress Bar -->
+                    <div class="h-1 bg-gray-200 absolute top-5 left-0 w-full z-0">
+                        <div class="h-1 bg-[#a53692] transition-all duration-500" style="width: {{ $currentStep == 1 ? '0%' : ($currentStep == 2 ? '33%' : ($currentStep == 3 ? '67%' : '100%')) }};"></div>
+                    </div>
+                    
+                    <!-- Step Circles -->
+                    <div class="flex justify-between relative z-10">
+                        <!-- Step 1 -->
+                        <div class="text-center">
+                            <div class="{{ $currentStep >= 1 ? 'bg-[#a53692] text-white' : 'bg-white text-gray-500 border border-gray-300' }} w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 transition-all duration-300">
+                                @if($currentStep > 1)
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                @else
+                                    <span>1</span>
+                                @endif
+                            </div>
+                            <div class="text-sm font-medium {{ $currentStep >= 1 ? 'text-[#a53692]' : 'text-gray-500' }}">Personal Info</div>
+                        </div>
+                        
+                        <!-- Step 2 -->
+                        <div class="text-center">
+                            <div class="{{ $currentStep >= 2 ? 'bg-[#a53692] text-white' : 'bg-white text-gray-500 border border-gray-300' }} w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 transition-all duration-300">
+                                @if($currentStep > 2)
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                @else
+                                    <span>2</span>
+                                @endif
+                            </div>
+                            <div class="text-sm font-medium {{ $currentStep >= 2 ? 'text-[#a53692]' : 'text-gray-500' }}">Appointment Details</div>
+                        </div>
+                        
+                        <!-- Step 3 -->
+                        <div class="text-center">
+                            <div class="{{ $currentStep >= 3 ? 'bg-[#a53692] text-white' : 'bg-white text-gray-500 border border-gray-300' }} w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 transition-all duration-300">
+                                @if($currentStep > 3)
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                @else
+                                    <span>3</span>
+                                @endif
+                            </div>
+                            <div class="text-sm font-medium {{ $currentStep >= 3 ? 'text-[#a53692]' : 'text-gray-500' }}">Medical Information</div>
+                        </div>
+                        
+                        <!-- Step 4 -->
+                        <div class="text-center">
+                            <div class="{{ $currentStep >= 4 ? 'bg-[#a53692] text-white' : 'bg-white text-gray-500 border border-gray-300' }} w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 transition-all duration-300">
+                                <span>4</span>
+                            </div>
+                            <div class="text-sm font-medium {{ $currentStep >= 4 ? 'text-[#a53692]' : 'text-gray-500' }}">Review & Submit</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form wire:submit.prevent="submitForm" class="space-y-6">
+                    <!-- Step 1: Personal Information -->
+                    @if($currentStep == 1)
+                    <div class="space-y-6">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-[#f9f0f7] w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-[#a53692]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 ml-4">Personal Information</h3>
+                        </div>
+                        
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
-                                <input type="text" id="first_name" name="first_name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required>
+                                <input type="text" id="first_name" wire:model="first_name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                @error('first_name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
-                                <input type="text" id="last_name" name="last_name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required>
+                                <input type="text" id="last_name" wire:model="last_name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                @error('last_name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required>
+                                <input type="email" id="email" wire:model="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                @error('email') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
-                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required>
+                                <input type="tel" id="phone" wire:model="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                @error('phone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="dob" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth *</label>
-                                <input type="date" id="dob" name="dob" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required>
+                                <input type="date" id="dob" wire:model="dob" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                @error('dob') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="gender" class="block text-sm font-medium text-gray-700 mb-1">Gender *</label>
-                                <select id="gender" name="gender" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required>
+                                <select id="gender" wire:model="gender" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
                                     <option value="">Select</option>
                                     <option value="female">Female</option>
                                     <option value="male">Male</option>
                                     <option value="other">Other</option>
                                     <option value="prefer_not_to_say">Prefer not to say</option>
                                 </select>
+                                @error('gender') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        
+                        <div class="flex justify-end">
+                            <button type="button" wire:click="nextStep" class="bg-[#a53692] text-white px-6 py-3 rounded-md hover:bg-[#8c2b7b] font-medium transition-colors flex items-center">
+                                Next Step
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+                    @endif
                     
-                    <!-- Appointment Details -->
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Appointment Details</h3>
+                    <!-- Step 2: Appointment Details -->
+                    @if($currentStep == 2)
+                    <div class="space-y-6">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-[#f9f0f7] w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-[#a53692]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 ml-4">Appointment Details</h3>
+                        </div>
+                        
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Select Department *</label>
-                                <select id="department" name="department" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required>
+                                <select id="department" wire:model="department" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
                                     <option value="">Select Department</option>
                                     @foreach($departments as $department)
                                         <option value="{{ $department->id }}">{{ $department->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('department') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="doctor" class="block text-sm font-medium text-gray-700 mb-1">Select Doctor (Optional)</label>
-                                <select id="doctor" name="doctor" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                <select id="doctor" wire:model="doctor" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
                                     <option value="">Any Available Doctor</option>
                                     @foreach($doctors as $doctor)
                                         <option value="{{ $doctor->id }}">Dr. {{ $doctor->name }} ({{ $doctor->department->name }})</option>
                                     @endforeach
                                 </select>
+                                @error('doctor') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="appointment_type" class="block text-sm font-medium text-gray-700 mb-1">Appointment Type *</label>
-                                <select id="appointment_type" name="appointment_type" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required>
+                                <select id="appointment_type" wire:model="appointment_type" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
                                     <option value="">Select Type</option>
                                     <option value="new_patient">New Patient Consultation</option>
                                     <option value="followup">Follow-up Visit</option>
@@ -155,85 +252,288 @@
                                     <option value="second_opinion">Second Opinion</option>
                                     <option value="emergency">Urgent Care</option>
                                 </select>
+                                @error('appointment_type') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="preferred_date" class="block text-sm font-medium text-gray-700 mb-1">Preferred Date *</label>
-                                <input type="date" id="preferred_date" name="preferred_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required>
+                                <input type="date" id="preferred_date" wire:model="preferred_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                @error('preferred_date') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="preferred_time" class="block text-sm font-medium text-gray-700 mb-1">Preferred Time *</label>
-                                <select id="preferred_time" name="preferred_time" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required>
+                                <select id="preferred_time" wire:model="preferred_time" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
                                     <option value="">Select Time</option>
                                     <option value="morning">Morning (9:00 AM - 12:00 PM)</option>
                                     <option value="afternoon">Afternoon (12:00 PM - 3:00 PM)</option>
                                     <option value="evening">Evening (3:00 PM - 6:00 PM)</option>
                                 </select>
+                                @error('preferred_time') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="alternate_date" class="block text-sm font-medium text-gray-700 mb-1">Alternate Date</label>
-                                <input type="date" id="alternate_date" name="alternate_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                <input type="date" id="alternate_date" wire:model="alternate_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                @error('alternate_date') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        
+                        <div class="flex justify-between">
+                            <button type="button" wire:click="previousStep" class="border border-gray-300 bg-white text-gray-700 px-6 py-3 rounded-md hover:bg-gray-50 font-medium transition-colors flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                                </svg>
+                                Previous
+                            </button>
+                            
+                            <button type="button" wire:click="nextStep" class="bg-[#a53692] text-white px-6 py-3 rounded-md hover:bg-[#8c2b7b] font-medium transition-colors flex items-center">
+                                Next Step
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+                    @endif
                     
-                    <!-- Medical Information -->
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Medical Information</h3>
+                    <!-- Step 3: Medical Information -->
+                    @if($currentStep == 3)
+                    <div class="space-y-6">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-[#f9f0f7] w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-[#a53692]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 ml-4">Medical Information</h3>
+                        </div>
+                        
                         <div class="space-y-6">
                             <div>
                                 <label for="reason" class="block text-sm font-medium text-gray-700 mb-1">Reason for Visit *</label>
-                                <textarea id="reason" name="reason" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" required></textarea>
+                                <textarea id="reason" wire:model="reason" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]"></textarea>
+                                @error('reason') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Have you been to our clinic before? *</label>
                                 <div class="mt-2 space-x-6">
                                     <label class="inline-flex items-center">
-                                        <input type="radio" name="previous_visit" value="yes" class="text-[#a53692] focus:ring-[#a53692]" required>
+                                        <input type="radio" wire:model="previous_visit" value="yes" class="text-[#a53692] focus:ring-[#a53692]">
                                         <span class="ml-2">Yes</span>
                                     </label>
                                     <label class="inline-flex items-center">
-                                        <input type="radio" name="previous_visit" value="no" class="text-[#a53692] focus:ring-[#a53692]">
+                                        <input type="radio" wire:model="previous_visit" value="no" class="text-[#a53692] focus:ring-[#a53692]">
                                         <span class="ml-2">No</span>
                                     </label>
                                 </div>
+                                @error('previous_visit') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Do you have medical records to share?</label>
                                 <div class="mt-2 space-x-6">
                                     <label class="inline-flex items-center">
-                                        <input type="radio" name="has_records" value="yes" class="text-[#a53692] focus:ring-[#a53692]">
+                                        <input type="radio" wire:model="has_records" value="yes" class="text-[#a53692] focus:ring-[#a53692]">
                                         <span class="ml-2">Yes</span>
                                     </label>
                                     <label class="inline-flex items-center">
-                                        <input type="radio" name="has_records" value="no" class="text-[#a53692] focus:ring-[#a53692]">
+                                        <input type="radio" wire:model="has_records" value="no" class="text-[#a53692] focus:ring-[#a53692]">
                                         <span class="ml-2">No</span>
                                     </label>
                                 </div>
+                                @error('has_records') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="additional_info" class="block text-sm font-medium text-gray-700 mb-1">Additional Information</label>
-                                <textarea id="additional_info" name="additional_info" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" placeholder="Please share any additional information that might be helpful for our team."></textarea>
+                                <textarea id="additional_info" wire:model="additional_info" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" placeholder="Please share any additional information that might be helpful for our team."></textarea>
+                                @error('additional_info') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        
+                        <div class="flex justify-between">
+                            <button type="button" wire:click="previousStep" class="border border-gray-300 bg-white text-gray-700 px-6 py-3 rounded-md hover:bg-gray-50 font-medium transition-colors flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                                </svg>
+                                Previous
+                            </button>
+                            
+                            <button type="button" wire:click="nextStep" class="bg-[#a53692] text-white px-6 py-3 rounded-md hover:bg-[#8c2b7b] font-medium transition-colors flex items-center">
+                                Review Information
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+                    @endif
                     
-                    <!-- Terms and Submit -->
-                    <div>
-                        <div class="mb-6">
-                            <label class="inline-flex items-center">
-                                <input type="checkbox" class="rounded text-[#a53692] focus:ring-[#a53692]" required>
-                                <span class="ml-2 text-sm text-gray-600">I agree to the <a href="#" class="text-[#a53692] hover:underline">terms and conditions</a> and <a href="#" class="text-[#a53692] hover:underline">privacy policy</a>.</span>
-                            </label>
+                    <!-- Step 4: Review & Submit -->
+                    @if($currentStep == 4)
+                    <div class="space-y-6">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-[#f9f0f7] w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-[#a53692]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 ml-4">Review & Submit</h3>
                         </div>
                         
-                        <button type="submit" class="w-full bg-[#a53692] text-white px-6 py-3 rounded-md hover:bg-[#8c2b7b] font-medium transition-colors">
-                            Request Appointment
-                        </button>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-medium text-gray-900 mb-4">Personal Information</h4>
+                            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                                <div>
+                                    <p class="text-sm text-gray-500">Full Name</p>
+                                    <p class="font-medium">{{ $first_name }} {{ $last_name }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Email Address</p>
+                                    <p class="font-medium">{{ $email }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Phone Number</p>
+                                    <p class="font-medium">{{ $phone }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Date of Birth</p>
+                                    <p class="font-medium">{{ $dob }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Gender</p>
+                                    <p class="font-medium">{{ ucfirst($gender) }}</p>
+                                </div>
+                            </div>
+                            
+                            <h4 class="text-lg font-medium text-gray-900 mb-4">Appointment Details</h4>
+                            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                                <div>
+                                    <p class="text-sm text-gray-500">Department</p>
+                                    <p class="font-medium">
+                                        @if($department)
+                                            {{ $departments->firstWhere('id', $department)->name ?? 'Selected Department' }}
+                                        @else
+                                            Not specified
+                                        @endif
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Doctor</p>
+                                    <p class="font-medium">
+                                        @if($doctor)
+                                            Dr. {{ $doctors->firstWhere('id', $doctor)->name ?? 'Selected Doctor' }}
+                                        @else
+                                            Any Available Doctor
+                                        @endif
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Appointment Type</p>
+                                    <p class="font-medium">
+                                        @switch($appointment_type)
+                                            @case('new_patient')
+                                                New Patient Consultation
+                                                @break
+                                            @case('followup')
+                                                Follow-up Visit
+                                                @break
+                                            @case('treatment')
+                                                Treatment Session
+                                                @break
+                                            @case('second_opinion')
+                                                Second Opinion
+                                                @break
+                                            @case('emergency')
+                                                Urgent Care
+                                                @break
+                                            @default
+                                                Not specified
+                                        @endswitch
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Preferred Date & Time</p>
+                                    <p class="font-medium">{{ $preferred_date }} ({{ ucfirst($preferred_time) }})</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Alternate Date</p>
+                                    <p class="font-medium">{{ $alternate_date ?: 'None provided' }}</p>
+                                </div>
+                            </div>
+                            
+                            <h4 class="text-lg font-medium text-gray-900 mb-4">Medical Information</h4>
+                            <div class="mb-6">
+                                <p class="text-sm text-gray-500">Reason for Visit</p>
+                                <p class="font-medium">{{ $reason }}</p>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <p class="text-sm text-gray-500">Previous Visit</p>
+                                    <p class="font-medium">{{ ucfirst($previous_visit) }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Medical Records to Share</p>
+                                    <p class="font-medium">{{ ucfirst($has_records) }}</p>
+                                </div>
+                            </div>
+                            @if($additional_info)
+                            <div class="mb-6">
+                                <p class="text-sm text-gray-500">Additional Information</p>
+                                <p class="font-medium">{{ $additional_info }}</p>
+                            </div>
+                            @endif
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" wire:model="terms_accepted" class="rounded text-[#a53692] focus:ring-[#a53692]">
+                                <span class="ml-2 text-sm text-gray-600">I agree to the <a href="#" class="text-[#a53692] hover:underline">terms and conditions</a> and <a href="#" class="text-[#a53692] hover:underline">privacy policy</a>.</span>
+                            </label>
+                            @error('terms_accepted') <span class="block text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <button type="button" wire:click="previousStep" class="border border-gray-300 bg-white text-gray-700 px-6 py-3 rounded-md hover:bg-gray-50 font-medium transition-colors flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                                </svg>
+                                Previous
+                            </button>
+                            
+                            <button type="submit" class="bg-[#a53692] text-white px-6 py-3 rounded-md hover:bg-[#8c2b7b] font-medium transition-colors flex items-center">
+                                Submit Appointment Request
+                                <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
                         
                         <p class="text-sm text-gray-500 mt-4 text-center">
-                            This is an appointment request form. Our team will contact you to confirm your appointment.
+                            This is an appointment request form. Our team will contact you within 24 hours to confirm your appointment.
                         </p>
                     </div>
+                    @endif
+                    
+                    <!-- Success Message (after form submission) -->
+                    @if($currentStep == 5)
+                    <div class="text-center py-12">
+                        <div class="w-20 h-20 bg-[#f9f0f7] rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-10 h-10 text-[#a53692]" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Appointment Request Submitted!</h3>
+                        <p class="text-gray-600 mb-8">
+                            Thank you for submitting your appointment request. We've sent a confirmation email to <span class="font-medium">{{ $email }}</span>. 
+                            Our team will contact you within 24 hours to confirm your appointment details.
+                        </p>
+                        <div class="border-t border-gray-200 pt-6">
+                            <p class="font-medium mb-2">Reference Number: <span class="text-[#a53692]">{{ $reference_number }}</span></p>
+                            <p class="text-sm text-gray-500 mb-6">Please save this reference number for future communications.</p>
+                            
+                            <a href="{{ route('home') }}" class="inline-block px-6 py-3 bg-[#a53692] text-white font-medium rounded-md hover:bg-[#8c2b7b] transition-colors">
+                                Return to Homepage
+                            </a>
+                        </div>
+                    </div>
+                    @endif
                 </form>
             </div>
         </div>
