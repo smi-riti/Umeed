@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Public\Homepage;
+
+
 use Illuminate\Support\Facades\Auth;
 
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;    
 use App\Livewire\Admin\Page\Dashboard;
-use App\Livewire\Public\Page\LandingPage;
 use App\Livewire\Admin\Department\DepartmentList;
 use App\Livewire\Admin\Department\DepartmentForm;
 use App\Livewire\Admin\Doctor\ListDoctor;
@@ -16,9 +18,8 @@ use App\Livewire\Admin\Appointment\AppointmentList;
 use App\Livewire\Admin\Appointment\AppointmentForm;
 use App\Livewire\Admin\Appointment\EditAppointment;
 
-Route::get('/',LandingPage::class)->name('landing');
 
-
+Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
 Route::post('/logout', function () {
