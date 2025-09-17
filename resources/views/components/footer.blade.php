@@ -39,12 +39,11 @@
             <div>
                 <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-[#dea5cf] transition-colors">About Us</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-[#dea5cf] transition-colors">Our Services</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-[#dea5cf] transition-colors">Success Stories</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-[#dea5cf] transition-colors">Patient Resources</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-[#dea5cf] transition-colors">Blog</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-[#dea5cf] transition-colors">Career</a></li>
+                    <li><a href="{{ route('about') }}" class="text-gray-400 hover:text-[#dea5cf] transition-colors">About Us</a></li>
+                    <li><a href="{{ route('services') }}" class="text-gray-400 hover:text-[#dea5cf] transition-colors">Our Services</a></li>
+                    <li><a href="{{ route('doctors') }}" class="text-gray-400 hover:text-[#dea5cf] transition-colors">Doctors</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-gray-400 hover:text-[#dea5cf] transition-colors">Contact</a></li>
+                    <li><a href="{{ route('booking') }}" class="text-gray-400 hover:text-[#dea5cf] transition-colors">Book Appointment</a></li>
                 </ul>
             </div>
             

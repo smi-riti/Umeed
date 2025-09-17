@@ -5,37 +5,27 @@
         <div class="flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
-                <img src="{{ asset("image.png") }}" class="h-16" alt="">
+                <img src="{{ asset("image.png") }}" class="sm:h-16 h-12" alt="">
                 
             </div>
             
             <!-- Navigation -->
-            <nav class="hidden md:flex space-x-8">
-                <a href="{{ route('home') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('home') ? 'text-[#a53692]' : '' }} transition-colors duration-300 py-2">
-                    Home
-                </a>
-                <a href="#" class="text-gray-700 hover:text-purple-600 font-medium transition-colors duration-300 py-2">
-                    About Us
-                </a>
-                <a href="#" class="text-gray-700 hover:text-purple-600 font-medium transition-colors duration-300 py-2">
-                    Doctors
-                </a>
-                <a href="#" class="text-gray-700 hover:text-purple-600 font-medium transition-colors duration-300 py-2">
-                    Services
-                </a>
-                <a href="#" class="text-gray-700 hover:text-purple-600 font-medium transition-colors duration-300 py-2">
-                    Contact
-                </a>
+            <nav class="hidden md:flex gap-8">
+                <a href="{{ route('home') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('home') ? 'text-[#a53692]' : '' }} transition-colors duration-300 py-2">Home</a>
+                <a href="{{ route('about') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('about') ? 'text-[#a53692]' : '' }} transition-colors duration-300 py-2">About Us</a>
+                <a href="{{ route('doctors') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('doctors') ? 'text-[#a53692]' : '' }} transition-colors duration-300 py-2">Doctors</a>
+                <a href="{{ route('services') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('services') ? 'text-[#a53692]' : '' }} transition-colors duration-300 py-2">Services</a>
+                <a href="{{ route('contact') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('contact') ? 'text-[#a53692]' : '' }} transition-colors duration-300 py-2">Contact</a>
             </nav>
             
             <!-- CTA Buttons -->
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center md:space-x-4">
                 <a href="tel:+1234567890" class="hidden sm:flex text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">
                     📞 Call Now
                 </a>
-                <button class="bg-[#a53692] text-white px-6 py-2 rounded-md hover:bg-[#8c2b7b] font-medium transition-all duration-300">
-                    Book Appointment
-                </button>
+                <a href="{{ route('booking') }}" class="bg-[#a53692] text-white px-6 py-2 rounded-md hover:bg-[#8c2b7b] font-medium transition-all duration-300 flex gap-2 text-xs sm:text-base">
+                    <span class="hidden sm:flex">Book</span> Appointment
+                </a>
                 
                 <!-- Mobile Menu Button -->
                 <button class="md:hidden p-2" onclick="toggleMobileMenu()">
@@ -49,24 +39,13 @@
         <!-- Mobile Navigation Menu -->
         <div id="mobile-menu" class="hidden md:hidden pb-6 mt-4">
             <div class="flex flex-col space-y-4">
-                <a href="{{ route('home') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('home') ? 'text-[#a53692]' : '' }} transition-colors duration-300">
-                    Home
-                </a>
-                <a href="#" class="text-gray-700 hover:text-purple-600 font-medium transition-colors duration-300">
-                    About Us
-                </a>
-                <a href="#" class="text-gray-700 hover:text-purple-600 font-medium transition-colors duration-300">
-                    Doctors
-                </a>
-                <a href="#" class="text-gray-700 hover:text-purple-600 font-medium transition-colors duration-300">
-                    Services
-                </a>
-                <a href="#" class="text-gray-700 hover:text-purple-600 font-medium transition-colors duration-300">
-                    Contact
-                </a>
-                <a href="tel:+1234567890" class="text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">
-                    📞 Call Now
-                </a>
+                <a href="{{ route('home') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('home') ? 'text-[#a53692]' : '' }} transition-colors duration-300">Home</a>
+                <a href="{{ route('about') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('about') ? 'text-[#a53692]' : '' }} transition-colors duration-300">About Us</a>
+                <a href="{{ route('doctors') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('doctors') ? 'text-[#a53692]' : '' }} transition-colors duration-300">Doctors</a>
+                <a href="{{ route('services') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('services') ? 'text-[#a53692]' : '' }} transition-colors duration-300">Services</a>
+                <a href="{{ route('contact') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('contact') ? 'text-[#a53692]' : '' }} transition-colors duration-300">Contact</a>
+                <a href="{{ route('booking') }}" class="text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">Book Appointment</a>
+                <a href="tel:+1234567890" class="text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">📞 Call Now</a>
             </div>
         </div>
     </div>
