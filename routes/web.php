@@ -22,6 +22,12 @@ use App\Livewire\Admin\Doctor\EditDoctor;
 use App\Livewire\Admin\Appointment\AppointmentList;
 use App\Livewire\Admin\Appointment\AppointmentForm;
 use App\Livewire\Admin\Appointment\EditAppointment;
+use App\Livewire\Admin\DoctorProfile\ListDoctorProfile;
+use App\Livewire\Admin\DoctorProfile\AddDoctorProfile;
+use App\Livewire\Admin\DoctorProfile\EditDoctorProfile;
+use App\Livewire\Admin\Publication\ListPublication;
+use App\Livewire\Admin\Publication\AddPublication;
+use App\Livewire\Admin\Publication\EditPublication;
 
 Route::get('/', Homepage::class)->name('home');
 
@@ -58,4 +64,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/appointments', AppointmentList::class)->name('appointments.list');
     Route::get('/appointments/add', AppointmentForm::class)->name('appointments.add');
     Route::get('/appointments/edit/{appointmentId}', EditAppointment::class)->name('appointments.edit');
+    
+    // Doctor Profile routes
+    Route::get('/doctor-profiles', ListDoctorProfile::class)->name('doctor-profiles.list');
+    Route::get('/doctor-profiles/add', AddDoctorProfile::class)->name('doctor-profiles.add');
+    Route::get('/doctor-profiles/edit/{profile}', EditDoctorProfile::class)->name('doctor-profiles.edit');
+    
+    // Publication routes
+    Route::get('/publications', ListPublication::class)->name('publications.list');
+    Route::get('/publications/add', AddPublication::class)->name('publications.add');
+    Route::get('/publications/edit/{publication}', EditPublication::class)->name('publications.edit');
 });

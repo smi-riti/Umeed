@@ -21,7 +21,7 @@ class Appointment extends Model
     protected $casts = [
         'appointment_date' => 'date',
         'original_date' => 'date',
-        'appointment_time' => 'datetime:H:i',
+        'appointment_time' => 'datetime:H:i:s',
     ];
 
     public function patient(): BelongsTo
@@ -37,6 +37,12 @@ class Appointment extends Model
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    // Get department through doctor relationship
+    public function department()
+    {
+        return $this->doctor?->department;
     }
 
     public function getStatusColorAttribute(): string

@@ -43,8 +43,17 @@
         <!-- Doctor Information Summary Card -->
         <div class="bg-white border border-gray-200 rounded-lg p-5 mb-6">
             <div class="flex flex-col sm:flex-row items-center sm:items-start">
-                <div class="w-20 h-20 rounded-full bg-[#f9f0f7] flex items-center justify-center mb-4 sm:mb-0">
-                    <span class="text-xl font-bold text-[#a53692]">{{ substr($doctor->user->name, 0, 2) }}</span>
+                <div class="w-20 h-20 rounded-full mb-4 sm:mb-0 flex-shrink-0">
+                    @if($doctor->image_url)
+                        <img class="w-20 h-20 rounded-full object-cover border-2 border-gray-300" 
+                             src="{{ $doctor->image_url }}" 
+                             alt="{{ $doctor->user->name }}">
+                    @else
+                        <div class="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold text-xl"
+                             style="background-color: {{ $doctor->avatar_color }}">
+                            {{ $doctor->initials }}
+                        </div>
+                    @endif
                 </div>
                 <div class="sm:ml-5 text-center sm:text-left">
                     <h3 class="text-lg font-medium text-gray-900">Dr. {{ $doctor->user->name }}</h3>
@@ -143,6 +152,7 @@
                             <input type="password" 
                                 id="password" 
                                 wire:model="password" 
+                                autocomplete="new-password"
                                 class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a53692] focus:border-[#a53692] transition-all bg-gray-50 hover:bg-white"
                                 placeholder="••••••••">
                         </div>
@@ -170,6 +180,7 @@
                             <input type="password" 
                                 id="password_confirmation" 
                                 wire:model="password_confirmation" 
+                                autocomplete="new-password"
                                 class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a53692] focus:border-[#a53692] transition-all bg-gray-50 hover:bg-white"
                                 placeholder="••••••••">
                         </div>
@@ -237,6 +248,62 @@
                                 {{ $message }}
                             </p>
                         @enderror
+                    </div>
+                </div>
+
+                <!-- Profile Image -->
+                <div class="pt-4">
+                    <h4 class="text-md font-medium text-gray-900 mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#a53692]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        Profile Image
+                    </h4>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0">
+                            @if($image)
+                                <img class="h-20 w-20 rounded-full object-cover border-2 border-gray-300" 
+                                     src="{{ $image->temporaryUrl() }}" alt="Preview">
+                            @elseif($doctor->image_url && !$removeImage)
+                                <img class="h-20 w-20 rounded-full object-cover border-2 border-gray-300" 
+                                     src="{{ $doctor->image_url }}" alt="{{ $doctor->user->name }}">
+                            @else
+                                <div class="h-20 w-20 rounded-full flex items-center justify-center text-white font-medium"
+                                     style="background-color: {{ $doctor->avatar_color }}">
+                                    {{ $doctor->initials }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="flex-1">
+                            <input type="file" 
+                                   wire:model="image" 
+                                   accept="image/*"
+                                   class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-[#a53692] file:text-white hover:file:bg-[#8c2d7c] file:cursor-pointer">
+                            <p class="mt-1 text-xs text-gray-500">PNG, JPG, GIF up to 2MB</p>
+                            
+                            @if($doctor->image_url && !$removeImage)
+                                <button type="button" 
+                                        wire:click="$set('removeImage', true)"
+                                        class="mt-2 text-xs text-red-600 hover:text-red-800">
+                                    Remove current image
+                                </button>
+                            @elseif($removeImage)
+                                <button type="button" 
+                                        wire:click="$set('removeImage', false)"
+                                        class="mt-2 text-xs text-blue-600 hover:text-blue-800">
+                                    Keep current image
+                                </button>
+                            @endif
+                            
+                            @error('image')
+                                <p class="mt-1 text-sm text-red-600 flex items-center">
+                                    <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 

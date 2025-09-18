@@ -5,7 +5,9 @@ namespace App\Livewire\Admin\Doctor;
 use App\Models\Doctor;
 use App\Models\Department;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -14,6 +16,8 @@ use Livewire\Attributes\Title;
 #[Layout('components.layouts.admin')]
 class EditDoctor extends Component
 {
+    use WithFileUploads;
+    
     public Doctor $doctor;
     public string $name = '';
     public string $email = '';
@@ -22,6 +26,8 @@ class EditDoctor extends Component
     public string $department_id = '';
     public string $fee = '';
     public bool $status = true;
+    public $image;
+    public bool $removeImage = false;
 
     public function mount(Doctor $doctor)
     {
@@ -41,7 +47,8 @@ class EditDoctor extends Component
             'password' => 'nullable|string|min:8|confirmed',
             'department_id' => 'required|exists:departments,id',
             'fee' => 'required|numeric|min:0',
-            'status' => 'boolean'
+            'status' => 'boolean',
+            'image' => 'nullable|image|max:2048' // 2MB max
         ];
     }
 
@@ -56,7 +63,9 @@ class EditDoctor extends Component
         'department_id.exists' => 'Selected department is invalid.',
         'fee.required' => 'Consultation fee is required.',
         'fee.numeric' => 'Consultation fee must be a number.',
-        'fee.min' => 'Consultation fee cannot be negative.'
+        'fee.min' => 'Consultation fee cannot be negative.',
+        'image.image' => 'The file must be an image.',
+        'image.max' => 'The image size cannot exceed 2MB.'
     ];
 
     public function save()
@@ -77,12 +86,28 @@ class EditDoctor extends Component
 
             $this->doctor->user->update($userData);
 
-            // Update doctor information
-            $this->doctor->update([
+            // Handle image upload
+            $doctorData = [
                 'department_id' => $this->department_id,
                 'fee' => $this->fee,
                 'status' => $this->status
-            ]);
+            ];
+
+            // Handle image update
+            if ($this->image) {
+                // Delete old image if exists
+                if ($this->doctor->image) {
+                    Storage::disk('public')->delete($this->doctor->image);
+                }
+                $doctorData['image'] = $this->image->store('doctors', 'public');
+            } elseif ($this->removeImage && $this->doctor->image) {
+                // Remove image if requested
+                Storage::disk('public')->delete($this->doctor->image);
+                $doctorData['image'] = null;
+            }
+
+            // Update doctor information
+            $this->doctor->update($doctorData);
 
             session()->flash('success', 'Doctor updated successfully!');
             

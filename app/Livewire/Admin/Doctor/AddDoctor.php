@@ -6,7 +6,9 @@ use App\Models\Doctor;
 use App\Models\Department;
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 use Livewire\Attributes\Layout;
@@ -16,6 +18,8 @@ use Livewire\Attributes\Title;
 #[Layout('components.layouts.admin')]
 class AddDoctor extends Component
 {
+    use WithFileUploads;
+    
     public string $name = '';
     public string $email = '';
     public string $password = '';
@@ -23,6 +27,7 @@ class AddDoctor extends Component
     public string $department_id = '';
     public string $fee = '500';
     public bool $status = true;
+    public $image;
 
     protected function rules()
     {
@@ -32,7 +37,8 @@ class AddDoctor extends Component
             'password' => 'required|string|min:8|confirmed',
             'department_id' => 'required|exists:departments,id',
             'fee' => 'required|numeric|min:0',
-            'status' => 'boolean'
+            'status' => 'boolean',
+            'image' => 'nullable|image|max:2048' // 2MB max
         ];
     }
 
@@ -48,7 +54,9 @@ class AddDoctor extends Component
         'department_id.exists' => 'Selected department is invalid.',
         'fee.required' => 'Consultation fee is required.',
         'fee.numeric' => 'Consultation fee must be a number.',
-        'fee.min' => 'Consultation fee cannot be negative.'
+        'fee.min' => 'Consultation fee cannot be negative.',
+        'image.image' => 'The file must be an image.',
+        'image.max' => 'The image size cannot exceed 2MB.'
     ];
 
     public function save()
@@ -64,12 +72,19 @@ class AddDoctor extends Component
                 'role' => 'doctor'
             ]);
 
+            // Handle image upload
+            $imagePath = null;
+            if ($this->image) {
+                $imagePath = $this->image->store('doctors', 'public');
+            }
+
             // Create doctor profile
             Doctor::create([
                 'user_id' => $user->id,
                 'department_id' => $this->department_id,
                 'fee' => $this->fee,
-                'status' => $this->status
+                'status' => $this->status,
+                'image' => $imagePath
             ]);
 
             session()->flash('success', 'Doctor added successfully!');

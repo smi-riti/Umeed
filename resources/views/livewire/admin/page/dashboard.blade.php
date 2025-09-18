@@ -211,18 +211,30 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div>
-                                            <div class="text-sm font-medium text-gray-900">{{ $appointment->patient->name }}</div>
-                                            <div class="text-sm text-gray-500">{{ $appointment->patient->email }}</div>
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ $appointment->patient ? $appointment->patient->name : 'Unknown Patient' }}
+                                            </div>
+                                            <div class="text-sm text-gray-500">
+                                                {{ $appointment->patient ? $appointment->patient->email : 'No Email' }}
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">Dr. {{ $appointment->doctor->name }}</div>
-                                    <div class="text-sm text-gray-500">{{ $appointment->doctor->department->name ?? 'No Department' }}</div>
+                                        <div class="text-sm text-gray-900">
+                                            Dr. {{ $appointment->doctor && $appointment->doctor->user ? $appointment->doctor->user->name : 'Unknown' }}
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            {{ $appointment->doctor && $appointment->doctor->department ? $appointment->doctor->department->name : 'No Department' }}
+                                        </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $appointment->appointment_date->format('M d, Y') }}</div>
-                                    <div class="text-sm text-gray-500">{{ $appointment->appointment_time->format('h:i A') }}</div>
+                                    <div class="text-sm text-gray-900">
+                                        {{ $appointment->appointment_date ? $appointment->appointment_date->format('M d, Y') : 'No Date' }}
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        {{ $appointment->appointment_time ? $appointment->appointment_time->format('h:i A') : 'No Time' }}
+                                    </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @php
@@ -272,18 +284,29 @@
                         <li class="px-6 py-4">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-10 w-10 rounded-full bg-[#f9f0f7] flex items-center justify-center">
-                                    @if ($doctor->image)
-                                        <img class="h-10 w-10 rounded-full" src="{{ $doctor->image }}" alt="{{ $doctor->name }}">
+                                    @if ($doctor->image_url)
+                                        <img class="h-10 w-10 rounded-full object-cover" 
+                                             src="{{ $doctor->image_url }}" 
+                                             alt="{{ $doctor->user ? $doctor->user->name : 'Doctor' }}">
                                     @else
-                                        <svg class="h-6 w-6 text-[#a53692]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                        </svg>
+                                        @if($doctor->user)
+                                            <div class="h-10 w-10 rounded-full flex items-center justify-center text-white font-medium text-sm"
+                                                 style="background-color: {{ $doctor->avatar_color }}">
+                                                {{ $doctor->initials }}
+                                            </div>
+                                        @else
+                                            <svg class="h-6 w-6 text-[#a53692]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
+                                        @endif
                                     @endif
                                 </div>
                                 <div class="ml-4 flex-1">
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <h4 class="text-sm font-medium text-gray-900">Dr. {{ $doctor->name }}</h4>
+                                            <h4 class="text-sm font-medium text-gray-900">
+                                                Dr. {{ $doctor->user ? $doctor->user->name : 'Unknown Doctor' }}
+                                            </h4>
                                             <p class="text-sm text-gray-500">{{ $doctor->department->name ?? 'No Department' }}</p>
                                         </div>
                                         <div class="flex items-center text-sm text-gray-500">
@@ -326,8 +349,8 @@
                                 <div class="ml-4 flex-1">
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <h4 class="text-sm font-medium text-gray-900">{{ $patient->name }}</h4>
-                                            <p class="text-sm text-gray-500">{{ $patient->email }}</p>
+                                            <h4 class="text-sm font-medium text-gray-900">{{ $patient->name ?? 'Unknown Patient' }}</h4>
+                                            <p class="text-sm text-gray-500">{{ $patient->email ?? 'No Email' }}</p>
                                         </div>
                                         <div>
                                             <a href="#" class="text-sm font-medium text-[#a53692] hover:text-[#8c2b7b]">

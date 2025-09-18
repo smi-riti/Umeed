@@ -1,7 +1,7 @@
 <div>
     @section('title', 'Book an Appointment - Umeed IVF Hospital')
-    @section('description', 'Schedule a consultation with Umeed IVF Hospital\'s fertility specialists. Book your appointment online for IVF, fertility treatments, and reproductive services.')
-    @section('keywords', 'fertility appointment, book IVF consultation, schedule fertility doctor, IVF treatment booking, fertility clinic appointment')
+    @section('description', 'Schedule a consultation with Umeed IVF Hospital\'s fertility specialists. Book your appointment online for IVF, fertility treatments, and reproductive services.'  )
+                                  
 
     <!-- Hero Section -->
     <section class="bg-[#f9f0f7] pt-24 pb-16 relative">
@@ -181,9 +181,9 @@
                                 @error('phone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
-                                <label for="dob" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth *</label>
-                                <input type="date" id="dob" wire:model="dob" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
-                                @error('dob') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                <label for="age" class="block text-sm font-medium text-gray-700 mb-1">Age *</label>
+                                <input type="number" id="age" wire:model="age" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                @error('age') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label for="gender" class="block text-sm font-medium text-gray-700 mb-1">Gender *</label>
@@ -223,7 +223,7 @@
                         
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Select Department *</label>
+                                <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Select Department (Optional)</label>
                                 <select id="department" wire:model="department" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
                                     <option value="">Select Department</option>
                                     @foreach($departments as $department)
@@ -234,45 +234,23 @@
                             </div>
                             <div>
                                 <label for="doctor" class="block text-sm font-medium text-gray-700 mb-1">Select Doctor (Optional)</label>
-                                <select id="doctor" wire:model="doctor" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                <select id="doctor" wire:model="doctor_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
                                     <option value="">Any Available Doctor</option>
                                     @foreach($doctors as $doctor)
-                                        <option value="{{ $doctor->id }}">Dr. {{ $doctor->name }} ({{ $doctor->department->name }})</option>
+                                        <option value="{{ $doctor->id }}">Dr. {{ $doctor->name }}{{ $doctor->department ? ' (' . $doctor->department->name . ')' : '' }}</option>
                                     @endforeach
                                 </select>
-                                @error('doctor') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                @error('doctor_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
-                                <label for="appointment_type" class="block text-sm font-medium text-gray-700 mb-1">Appointment Type *</label>
-                                <select id="appointment_type" wire:model="appointment_type" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
-                                    <option value="">Select Type</option>
-                                    <option value="new_patient">New Patient Consultation</option>
-                                    <option value="followup">Follow-up Visit</option>
-                                    <option value="treatment">Treatment Session</option>
-                                    <option value="second_opinion">Second Opinion</option>
-                                    <option value="emergency">Urgent Care</option>
-                                </select>
-                                @error('appointment_type') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                <label for="appointment_date" class="block text-sm font-medium text-gray-700 mb-1">Preferred Date *</label>
+                                <input type="date" id="appointment_date" wire:model="appointment_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                @error('appointment_date') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
-                                <label for="preferred_date" class="block text-sm font-medium text-gray-700 mb-1">Preferred Date *</label>
-                                <input type="date" id="preferred_date" wire:model="preferred_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
-                                @error('preferred_date') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                            </div>
-                            <div>
-                                <label for="preferred_time" class="block text-sm font-medium text-gray-700 mb-1">Preferred Time *</label>
-                                <select id="preferred_time" wire:model="preferred_time" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
-                                    <option value="">Select Time</option>
-                                    <option value="morning">Morning (9:00 AM - 12:00 PM)</option>
-                                    <option value="afternoon">Afternoon (12:00 PM - 3:00 PM)</option>
-                                    <option value="evening">Evening (3:00 PM - 6:00 PM)</option>
-                                </select>
-                                @error('preferred_time') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                            </div>
-                            <div>
-                                <label for="alternate_date" class="block text-sm font-medium text-gray-700 mb-1">Alternate Date</label>
-                                <input type="date" id="alternate_date" wire:model="alternate_date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
-                                @error('alternate_date') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                <label for="appointment_time" class="block text-sm font-medium text-gray-700 mb-1">Preferred Time</label>
+                                <input type="time" id="appointment_time" wire:model="appointment_time" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]">
+                                @error('appointment_time') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         
@@ -308,42 +286,10 @@
                         
                         <div class="space-y-6">
                             <div>
-                                <label for="reason" class="block text-sm font-medium text-gray-700 mb-1">Reason for Visit *</label>
-                                <textarea id="reason" wire:model="reason" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]"></textarea>
-                                @error('reason') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Have you been to our clinic before? *</label>
-                                <div class="mt-2 space-x-6">
-                                    <label class="inline-flex items-center">
-                                        <input type="radio" wire:model="previous_visit" value="yes" class="text-[#a53692] focus:ring-[#a53692]">
-                                        <span class="ml-2">Yes</span>
-                                    </label>
-                                    <label class="inline-flex items-center">
-                                        <input type="radio" wire:model="previous_visit" value="no" class="text-[#a53692] focus:ring-[#a53692]">
-                                        <span class="ml-2">No</span>
-                                    </label>
-                                </div>
-                                @error('previous_visit') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Do you have medical records to share?</label>
-                                <div class="mt-2 space-x-6">
-                                    <label class="inline-flex items-center">
-                                        <input type="radio" wire:model="has_records" value="yes" class="text-[#a53692] focus:ring-[#a53692]">
-                                        <span class="ml-2">Yes</span>
-                                    </label>
-                                    <label class="inline-flex items-center">
-                                        <input type="radio" wire:model="has_records" value="no" class="text-[#a53692] focus:ring-[#a53692]">
-                                        <span class="ml-2">No</span>
-                                    </label>
-                                </div>
-                                @error('has_records') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                            </div>
-                            <div>
-                                <label for="additional_info" class="block text-sm font-medium text-gray-700 mb-1">Additional Information</label>
-                                <textarea id="additional_info" wire:model="additional_info" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" placeholder="Please share any additional information that might be helpful for our team."></textarea>
-                                @error('additional_info') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Reason for Visit & Additional Information *</label>
+                                <textarea id="notes" wire:model="notes" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#a53692] focus:border-[#a53692]" placeholder="Please describe the reason for your visit, any symptoms, medical history, current medications, or other information that might be helpful for our team."></textarea>
+                                @error('notes') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                <p class="text-sm text-gray-500 mt-1">Please provide at least 10 characters. Maximum 1000 characters.</p>
                             </div>
                         </div>
                         
@@ -393,10 +339,6 @@
                                     <p class="font-medium">{{ $phone }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-sm text-gray-500">Date of Birth</p>
-                                    <p class="font-medium">{{ $dob }}</p>
-                                </div>
-                                <div>
                                     <p class="text-sm text-gray-500">Gender</p>
                                     <p class="font-medium">{{ ucfirst($gender) }}</p>
                                 </div>
@@ -417,68 +359,26 @@
                                 <div>
                                     <p class="text-sm text-gray-500">Doctor</p>
                                     <p class="font-medium">
-                                        @if($doctor)
-                                            Dr. {{ $doctors->firstWhere('id', $doctor)->name ?? 'Selected Doctor' }}
+                                        @if($doctor_id)
+                                            Dr. {{ $doctors->firstWhere('id', $doctor_id)->name ?? 'Selected Doctor' }}
                                         @else
                                             Any Available Doctor
                                         @endif
                                     </p>
                                 </div>
                                 <div>
-                                    <p class="text-sm text-gray-500">Appointment Type</p>
-                                    <p class="font-medium">
-                                        @switch($appointment_type)
-                                            @case('new_patient')
-                                                New Patient Consultation
-                                                @break
-                                            @case('followup')
-                                                Follow-up Visit
-                                                @break
-                                            @case('treatment')
-                                                Treatment Session
-                                                @break
-                                            @case('second_opinion')
-                                                Second Opinion
-                                                @break
-                                            @case('emergency')
-                                                Urgent Care
-                                                @break
-                                            @default
-                                                Not specified
-                                        @endswitch
-                                    </p>
-                                </div>
-                                <div>
                                     <p class="text-sm text-gray-500">Preferred Date & Time</p>
-                                    <p class="font-medium">{{ $preferred_date }} ({{ ucfirst($preferred_time) }})</p>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Alternate Date</p>
-                                    <p class="font-medium">{{ $alternate_date ?: 'None provided' }}</p>
+                                    <p class="font-medium">
+                                        {{ $appointment_date }}{{ $appointment_time ? ' at ' . $appointment_time : ' (Time not specified)' }}
+                                    </p>
                                 </div>
                             </div>
                             
                             <h4 class="text-lg font-medium text-gray-900 mb-4">Medical Information</h4>
                             <div class="mb-6">
-                                <p class="text-sm text-gray-500">Reason for Visit</p>
-                                <p class="font-medium">{{ $reason }}</p>
+                                <p class="text-sm text-gray-500 mb-2">Reason for Visit & Additional Information</p>
+                                <p class="font-medium">{{ $notes }}</p>
                             </div>
-                            <div class="grid md:grid-cols-2 gap-4 mb-4">
-                                <div>
-                                    <p class="text-sm text-gray-500">Previous Visit</p>
-                                    <p class="font-medium">{{ ucfirst($previous_visit) }}</p>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Medical Records to Share</p>
-                                    <p class="font-medium">{{ ucfirst($has_records) }}</p>
-                                </div>
-                            </div>
-                            @if($additional_info)
-                            <div class="mb-6">
-                                <p class="text-sm text-gray-500">Additional Information</p>
-                                <p class="font-medium">{{ $additional_info }}</p>
-                            </div>
-                            @endif
                         </div>
                         
                         <div class="mb-6">
