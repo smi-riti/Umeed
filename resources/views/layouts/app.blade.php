@@ -25,7 +25,7 @@
     <meta property="og:url" content="{{ url()->current() }}">
     
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     
     <!-- Livewire Styles -->
     @livewireStyles
