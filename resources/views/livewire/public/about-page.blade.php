@@ -30,7 +30,7 @@
                 </div>
                 <div class="relative">
                     <div class="w-full h-96 bg-gray-200 rounded-lg overflow-hidden">
-                        <img src="{{ asset('images/hospital-building.jpg') }}" alt="Umeed IVF Hospital" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/600x400?text=Umeed+Hospital+Building';this.onerror='';">
+                        <img src="{{ asset("umeed.png") }}" alt="Umeed IVF Hospital" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/600x400?text=Umeed+Hospital+Building';this.onerror='';">
                     </div>
                     <div class="absolute -bottom-6 -right-6 bg-[#a53692] rounded-lg p-6 text-white shadow-lg">
                         <div class="text-4xl font-bold">15+</div>
@@ -40,7 +40,7 @@
             </div>
         </div>
     </section>
-
+    <livewire:components.book-appointment-button>
     <!-- Mission & Values -->
     <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -148,6 +148,7 @@
                         </div>
                     </div>
                 </div>
+
                 
                 <div class="grid grid-cols-2 gap-6">
                     <div class="rounded-lg overflow-hidden">

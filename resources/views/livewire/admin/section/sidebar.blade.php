@@ -77,7 +77,7 @@
                     </svg>
                     <span class="ml-3 text-sm font-medium">All Appointments</span>
                 </a>
-
+{{-- 
                 <a wire:navigate href=""
                     class="group flex items-center px-3 py-3 rounded-lg text-gray-800 hover:bg-[#f9f0f7] hover:text-[#a53692] transition-all">
                     <svg class="h-5 w-5 text-gray-500 group-hover:text-[#a53692] transition-colors"
@@ -86,7 +86,7 @@
                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span class="ml-3 text-sm font-medium">Pending Appointments</span>
-                </a>
+                </a> --}}
             </nav>
 
             <!-- Communication & Feedback -->
@@ -94,7 +94,7 @@
                 <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Communication</p>
             </div>
             <nav class="space-y-1 px-3">
-                <a wire:navigate href=""
+                <a wire:navigate href="{{ route('admin.enquiries') }}"
                     class="group flex items-center px-3 py-3 rounded-lg text-gray-800 hover:bg-[#f9f0f7] hover:text-[#a53692] transition-all">
                     <svg class="h-5 w-5 text-gray-500 group-hover:text-[#a53692] transition-colors"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,7 +104,7 @@
                     <span class="ml-3 text-sm font-medium">Enquiries</span>
                 </a>
 
-                <a wire:navigate href=""
+                <a wire:navigate href="{{ route('admin.review-create') }}"
                     class="group flex items-center px-3 py-3 rounded-lg text-gray-800 hover:bg-[#f9f0f7] hover:text-[#a53692] transition-all">
                     <svg class="h-5 w-5 text-gray-500 group-hover:text-[#a53692] transition-colors"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
