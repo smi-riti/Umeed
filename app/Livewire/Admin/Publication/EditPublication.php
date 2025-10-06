@@ -3,7 +3,7 @@
 namespace App\Livewire\Admin\Publication;
 
 use App\Models\Publication;
-use App\Models\DoctorProfile;
+use App\Models\Doctor;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -34,7 +34,7 @@ class EditPublication extends Component
     protected function rules()
     {
         return [
-            'doctor_id' => 'required|exists:doctor_profiles,id',
+            'doctor_id' => 'required|exists:doctors,id',
             'title' => 'required|string|max:255',
             'authors' => 'nullable|string|max:255',
             'journal' => 'nullable|string|max:255',
@@ -44,8 +44,8 @@ class EditPublication extends Component
     }
 
     protected $messages = [
-        'doctor_id.required' => 'Please select a doctor profile.',
-        'doctor_id.exists' => 'Selected doctor profile is invalid.',
+        'doctor_id.required' => 'Please select a doctor .',
+        'doctor_id.exists' => 'Selected doctor is invalid.',
         'title.required' => 'Publication title is required.',
         'title.max' => 'Publication title cannot exceed 255 characters.',
         'authors.max' => 'Authors cannot exceed 255 characters.',
@@ -87,7 +87,9 @@ class EditPublication extends Component
 
     public function render()
     {
-        $doctorProfiles = DoctorProfile::orderBy('name')->get();
+        $doctorProfiles = Doctor::with('user')->get()->sortBy(function($doctor) {
+            return $doctor->user->name;
+        });
         
         return view('livewire.admin.publication.edit-publication', [
             'doctorProfiles' => $doctorProfiles

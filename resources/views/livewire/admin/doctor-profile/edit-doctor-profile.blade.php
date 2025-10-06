@@ -5,7 +5,7 @@
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center">
                 <div class="mb-4 lg:mb-0">
                     <h1 class="text-2xl font-bold text-gray-800">Edit Doctor Profile</h1>
-                    <p class="text-gray-500 mt-1">Update detailed profile for {{ $profile->name }}</p>
+                    <p class="text-gray-500 mt-1">Update the doctor's profile details</p>
                 </div>
                 <button wire:click="cancel" 
                         class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-5 py-2 rounded-md font-medium transition-colors flex items-center">
@@ -42,7 +42,7 @@
 
         <!-- Form -->
         <div class="bg-white rounded-lg border border-gray-200">
-            <form wire:submit="update" class="p-6 space-y-6">
+            <form wire:submit="save" class="p-6 space-y-6">
                 <!-- Basic Information -->
                 <div class="mb-6 pb-6 border-b border-gray-200">
                     <h3 class="text-lg font-medium text-gray-900 mb-2 flex items-center">
@@ -55,10 +55,10 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Name -->
+                    <!-- Doctor Selection -->
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                            Doctor Name <span class="text-red-500">*</span>
+                        <label for="doctor_id" class="block text-sm font-medium text-gray-700 mb-2">
+                            Select Doctor <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -66,13 +66,17 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                             </div>
-                            <input type="text" 
-                                id="name" 
-                                wire:model="name" 
-                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a53692] focus:border-[#a53692] transition-all bg-gray-50 hover:bg-white"
-                                placeholder="Dr. John Doe">
+                            <select
+                                id="doctor_id" 
+                                wire:model="doctor_id" 
+                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a53692] focus:border-[#a53692] transition-all bg-gray-50 hover:bg-white">
+                                <option value="">-- Select a Doctor --</option>
+                                @foreach($doctors as $doctor)
+                                    <option value="{{ $doctor['id'] }}">{{ $doctor['name'] }} ({{ $doctor['department'] }})</option>
+                                @endforeach
+                            </select>
                         </div>
-                        @error('name')
+                        @error('doctor_id')
                             <p class="mt-1 text-sm text-red-600 flex items-center">
                                 <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -191,29 +195,79 @@
                         @enderror
                     </div>
 
-                    <!-- Social Media Link -->
+                    <!-- Social Media Links -->
                     <div>
-                        <label for="social_media_link" class="block text-sm font-medium text-gray-700 mb-2">
-                            Social Media Link
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Social Media Links
                         </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                                </svg>
+                        
+                        @foreach($socialMediaLinks as $index => $link)
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-1/3">
+                                <select
+                                    wire:model="socialMediaLinks.{{ $index }}.platform"
+                                    class="shadow-sm focus:ring-[#a53692] focus:border-[#a53692] block w-full sm:text-sm border-gray-300 rounded-md"
+                                >
+                                    <option value="">Select Platform</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="linkedin">LinkedIn</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="website">Website</option>
+                                </select>
                             </div>
-                            <input type="url" 
-                                id="social_media_link" 
-                                wire:model="social_media_link" 
-                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a53692] focus:border-[#a53692] transition-all bg-gray-50 hover:bg-white"
-                                placeholder="https://linkedin.com/in/doctor">
+                            <div class="flex-1 relative">
+                                <input 
+                                    type="text"
+                                    wire:model="socialMediaLinks.{{ $index }}.url"
+                                    class="shadow-sm focus:ring-[#a53692] focus:border-[#a53692] block w-full sm:text-sm border-gray-300 rounded-md"
+                                    placeholder="https://platform.com/username"
+                                >
+                                @if($index > 0)
+                                <button type="button" wire:click="removeSocialLink({{ $index }})" class="absolute right-2 top-1/2 -translate-y-1/2 text-red-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                @endif
+                            </div>
                         </div>
-                        @error('social_media_link')
+                        @endforeach
+                        
+                        <button 
+                            type="button" 
+                            wire:click="addSocialLink"
+                            class="mt-2 flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#a53692] hover:bg-[#8c2d7c]"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                            </svg>
+                            Add Another Platform
+                        </button>
+                        
+                        @error('socialMediaLinks')
                             <p class="mt-1 text-sm text-red-600 flex items-center">
                                 <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 {{ $message }}
+                            </p>
+                        @enderror
+                        @error('socialMediaLinks.*.platform')
+                            <p class="mt-1 text-sm text-red-600 flex items-center">
+                                <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Please select a platform
+                            </p>
+                        @enderror
+                        @error('socialMediaLinks.*.url')
+                            <p class="mt-1 text-sm text-red-600 flex items-center">
+                                <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Please enter a valid URL
                             </p>
                         @enderror
                     </div>
@@ -269,7 +323,7 @@
                     <button type="submit" 
                             class="px-5 py-2 text-sm font-medium text-white bg-[#a53692] rounded-md hover:bg-[#8c2d7c] focus:outline-none focus:ring-1 focus:ring-[#a53692] transition-colors flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                         </svg>
                         Update Profile
                     </button>

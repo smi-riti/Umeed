@@ -3,7 +3,7 @@
 namespace App\Livewire\Admin\Publication;
 
 use App\Models\Publication;
-use App\Models\DoctorProfile;
+use App\Models\Doctor;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
@@ -50,37 +50,64 @@ class ListPublication extends Component
         $this->resetPage();
     }
 
+    public function confirmDelete($publicationId)
+    {
+        // Direct deletion without confirmation
+        $this->delete($publicationId);
+    }
+
     public function delete($publicationId)
     {
         try {
             $publication = Publication::findOrFail($publicationId);
-            $publication->delete();
+            $publicationTitle = $publication->title ?? 'Unknown';
             
-            session()->flash('success', 'Publication deleted successfully!');
+            // Perform the delete operation directly
+            if($publication->delete()) {
+                session()->flash('success', "Publication '{$publicationTitle}' deleted successfully!");
+            } else {
+                session()->flash('error', 'Failed to delete publication.');
+            }
         } catch (\Exception $e) {
-            session()->flash('error', 'Failed to delete publication.');
+            session()->flash('error', 'Failed to delete publication: ' . $e->getMessage());
         }
+        
+        // Refresh data
+        $this->resetPage();
     }
+    
+    // Direct deletion without confirmation
 
     public function render()
     {
         $publications = Publication::query()
-            ->with('doctorProfile')
+            ->with('doctor.user')
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%')
                       ->orWhere('authors', 'like', '%' . $this->search . '%')
                       ->orWhere('journal', 'like', '%' . $this->search . '%')
-                      ->orWhereHas('doctorProfile', function ($q) {
+                      ->orWhereHas('doctor.user', function ($q) {
                           $q->where('name', 'like', '%' . $this->search . '%');
                       });
             })
             ->when($this->filterDoctorId, function ($query) {
                 $query->where('doctor_id', $this->filterDoctorId);
             })
-            ->orderBy($this->sortBy, $this->sortDirection)
+            ->when($this->sortBy === 'name', function ($query) {
+                // Handle sorting by doctor name through the relationship
+                $query->join('doctors', 'publications.doctor_id', '=', 'doctors.id')
+                      ->join('users', 'doctors.user_id', '=', 'users.id')
+                      ->orderBy('users.name', $this->sortDirection)
+                      ->select('publications.*');
+            }, function ($query) {
+                // Normal sorting for other fields
+                $query->orderBy($this->sortBy, $this->sortDirection);
+            })
             ->paginate($this->perPage);
 
-        $doctorProfiles = DoctorProfile::orderBy('name')->get();
+        $doctorProfiles = Doctor::with('user')->get()->sortBy(function($doctor) {
+            return $doctor->user->name;
+        });
 
         return view('livewire.admin.publication.list-publication', [
             'publications' => $publications,

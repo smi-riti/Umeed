@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('qualification')->nullable();
             $table->text('professional_bio')->nullable();
             $table->string('membership')->nullable();
-            $table->string('social_media_link')->nullable();
+            $table->json('social_media_link')->nullable();
             $table->string('special_interest')->nullable();
             $table->text('achievements')->nullable();
             $table->string('language_spoken')->nullable();

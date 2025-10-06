@@ -42,28 +42,60 @@ class ListDoctorProfile extends Component
         $this->resetPage();
     }
 
+    public function confirmDelete($profileId)
+    {
+        // Direct deletion without confirmation
+        $this->delete($profileId);
+    }
+
     public function delete($profileId)
     {
         try {
             $profile = DoctorProfile::findOrFail($profileId);
-            $profile->delete();
+            $doctorName = $profile->doctor->user->name ?? 'Unknown';
             
-            session()->flash('success', 'Doctor profile deleted successfully!');
+            // Perform the delete operation directly
+            if($profile->delete()) {
+                session()->flash('success', "Doctor profile for '{$doctorName}' deleted successfully!");
+            } else {
+                session()->flash('error', 'Failed to delete doctor profile.');
+            }
         } catch (\Exception $e) {
-            session()->flash('error', 'Failed to delete doctor profile.');
+            session()->flash('error', 'Failed to delete doctor profile: ' . $e->getMessage());
         }
+        
+        // Refresh data
+        $this->resetPage();
     }
+    
+    // Direct deletion without confirmation
 
     public function render()
     {
-        $profiles = DoctorProfile::query()
-            ->when($this->search, function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%')
-                      ->orWhere('qualification', 'like', '%' . $this->search . '%')
-                      ->orWhere('special_interest', 'like', '%' . $this->search . '%');
-            })
-            ->orderBy($this->sortBy, $this->sortDirection)
-            ->paginate($this->perPage);
+        $query = DoctorProfile::query()->with('doctor.user'); // Eager load the doctor relationship
+        
+        // Apply search filters if any
+        if ($this->search) {
+            $query->where(function($q) {
+                $q->whereHas('doctor.user', function ($subQuery) {
+                    $subQuery->where('name', 'like', '%' . $this->search . '%');
+                })
+                ->orWhere('qualification', 'like', '%' . $this->search . '%')
+                ->orWhere('special_interest', 'like', '%' . $this->search . '%');
+            });
+        }
+        
+        // Apply sorting
+        if ($this->sortBy === 'name') {
+            $query->select('doctor_profiles.*')
+                  ->join('doctors', 'doctor_profiles.doctor_id', '=', 'doctors.id')
+                  ->join('users', 'doctors.user_id', '=', 'users.id')
+                  ->orderBy('users.name', $this->sortDirection);
+        } else {
+            $query->orderBy($this->sortBy, $this->sortDirection);
+        }
+        
+        $profiles = $query->paginate($this->perPage);
 
         return view('livewire.admin.doctor-profile.list-doctor-profile', [
             'profiles' => $profiles

@@ -51,6 +51,24 @@
                     </svg>
                     <span class="ml-3 text-sm font-medium">Doctors</span>
                 </a>
+                <a wire:navigate href="{{ route('admin.publications.list') }}"
+                    class="group flex items-center px-3 py-3 rounded-lg text-gray-800 hover:bg-[#f9f0f7] hover:text-[#a53692] transition-all">
+                    <svg class="h-5 w-5 text-gray-500 group-hover:text-[#a53692] transition-colors"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span class="ml-3 text-sm font-medium">Doctors Publication</span>
+                </a>
+                <a wire:navigate href="{{ route('admin.doctor-profiles.list') }}"
+                    class="group flex items-center px-3 py-3 rounded-lg text-gray-800 hover:bg-[#f9f0f7] hover:text-[#a53692] transition-all">
+                    <svg class="h-5 w-5 text-gray-500 group-hover:text-[#a53692] transition-colors"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span class="ml-3 text-sm font-medium">Doctors Profile</span>
+                </a>
 
                 <a wire:navigate href=""
                     class="group flex items-center px-3 py-3 rounded-lg text-gray-800 hover:bg-[#f9f0f7] hover:text-[#a53692] transition-all">
