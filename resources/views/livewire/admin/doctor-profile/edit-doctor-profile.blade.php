@@ -140,6 +140,30 @@
                             </p>
                         @enderror
                     </div>
+                    <!-- Experience -->
+                    <div>
+                        <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">
+                            Experience
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                
+                            </div>
+                            <input type="text" 
+                                id="experience" 
+                                wire:model="experience" 
+                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a53692] focus:border-[#a53692] transition-all bg-gray-50 hover:bg-white"
+                                placeholder="4 years, 5 years, etc.">
+                        </div>
+                        @error('experience')
+                            <p class="mt-1 text-sm text-red-600 flex items-center">
+                                <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
 
                     <!-- Special Interest -->
                     <div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Admin\Enquirie\EnquiryList;
+use App\Livewire\Admin\Patient\ManagePatient;
 use App\Livewire\Admin\Review\ReviewCreate;
 use App\Livewire\Admin\Review\ReviewList;
 use App\Livewire\Public\ViewDoctor;
@@ -85,4 +86,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
     //review create
     Route::get('/review', ReviewList::class)->name('review-create');
+
+    //manage patients
+    Route::get('/patients', ManagePatient::class)->name('patients');
 });
