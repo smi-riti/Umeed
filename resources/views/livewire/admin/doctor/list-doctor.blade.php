@@ -145,9 +145,9 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="flex-shrink-0 h-10 w-10">
-                                                @if($doctor->image_url)
+                                                @if($doctor->image)
                                                     <img class="h-10 w-10 rounded-full object-cover" 
-                                                         src="{{ $doctor->image_url }}" 
+                                                       src="{{ asset('storage/' . $doctor->image) }}"
                                                          alt="{{ $doctor->user->name }}">
                                                 @else
                                                     <div class="h-10 w-10 rounded-full flex items-center justify-center text-white font-medium text-sm"

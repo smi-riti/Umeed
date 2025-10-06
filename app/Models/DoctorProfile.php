@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DoctorProfile extends Model
@@ -45,5 +46,9 @@ class DoctorProfile extends Model
             return implode(', ', $this->language_spoken);
         }
         return $this->language_spoken ?? '';
+    }
+      public function doctor(): BelongsTo
+    {
+        return $this->belongsTo(Doctor::class);
     }
 }

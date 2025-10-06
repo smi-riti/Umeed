@@ -14,6 +14,8 @@
             </div>
         </div>
     </section>
+        <livewire:components.book-appointment-button>
+
 
     <!-- Main Services Section -->
     <section class="py-16 bg-white">
