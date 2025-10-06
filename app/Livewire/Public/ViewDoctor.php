@@ -3,8 +3,9 @@
 namespace App\Livewire\Public;
 
 use App\Models\Doctor;
+use Livewire\Attributes\Title;
 use Livewire\Component;
-
+#[Title("Doctor's Profile")]
 class ViewDoctor extends Component
 {
     public $doctor;
@@ -14,7 +15,7 @@ class ViewDoctor extends Component
     public function mount($id)
     {
         $this->doctorId = $id;
-        $this->doctor = Doctor::with(['department', 'user'])
+        $this->doctor = Doctor::with(['department', 'user', 'profile'])
                             ->findOrFail($id);
         $this->user = $this->doctor->user;
     }

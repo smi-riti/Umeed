@@ -20,7 +20,9 @@ class EditDoctorProfile extends Component
     public string $special_interest = '';
     public string $achievements = '';
     public string $language_spoken = '';
+    public string $experience = '';
     public array $socialMediaLinks = [];
+
     public $profileId;
 
     protected function rules()
@@ -33,7 +35,8 @@ class EditDoctorProfile extends Component
             'social_media_link' => 'nullable|string|max:1000',
             'special_interest' => 'nullable|string|max:255',
             'achievements' => 'nullable|string|max:1000',
-            'language_spoken' => 'nullable|string|max:255'
+            'language_spoken' => 'nullable|string|max:255',
+            'experience' => 'nullable|string|max:255'
         ];
     }
 
@@ -46,7 +49,8 @@ class EditDoctorProfile extends Component
         'social_media_link.max' => 'Social media links cannot exceed 1000 characters.',
         'special_interest.max' => 'Special interest cannot exceed 255 characters.',
         'achievements.max' => 'Achievements cannot exceed 1000 characters.',
-        'language_spoken.max' => 'Languages spoken cannot exceed 255 characters.'
+        'language_spoken.max' => 'Languages spoken cannot exceed 255 characters.',
+        'experience.max' => 'Experience cannot exceed 255 characters.',
     ];
 
     public function mount(DoctorProfile $profile)
@@ -57,7 +61,8 @@ class EditDoctorProfile extends Component
         $this->professional_bio = $profile->professional_bio ?? '';
         $this->membership = $profile->membership ?? '';
         $this->special_interest = $profile->special_interest ?? '';
-        
+        $this->experience = $profile->experience ?? '';
+
         // Parse achievements and languages
         if (is_array($profile->achievements)) {
             $this->achievements = implode(", ", $profile->achievements);
@@ -149,6 +154,8 @@ class EditDoctorProfile extends Component
             $profile->special_interest = $this->special_interest;
             $profile->achievements = $achievements;
             $profile->language_spoken = $languages;
+            $profile->experience = $this->experience;
+
             $profile->save();
             
             session()->flash('success', 'Doctor profile updated successfully!');

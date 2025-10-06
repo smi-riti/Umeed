@@ -21,7 +21,6 @@ class DoctorProfile extends Model
     ];
 
     protected $casts = [
-        'achievements' => 'array',
         'language_spoken' => 'array',
         'social_media_link' => 'array'
     ];

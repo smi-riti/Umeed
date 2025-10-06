@@ -715,7 +715,7 @@
                                 </div>
                                 <div class="p-6">
                                     <div class="flex items-center justify-between mb-2">
-                                        <span class="text-sm text-[#a53692]/70">15+ Years Experience</span>
+                                        <span class="text-sm text-[#a53692]/70">{{ $doctor->profile->experience ?? '0' }} Experience</span>
                                         <div class="flex items-center">
                                             <span class="text-yellow-400">★</span>
                                             <span class="text-sm text-gray-600 ml-1">4.9 (195)</span>
@@ -727,15 +727,9 @@
                                     <p class="text-[#a53692] font-medium mb-2">
                                         {{ $doctor->department->name ?? 'Fertility Specialist' }}</p>
                                     <p class="text-gray-600 text-sm mb-4">
-                                        {{ $doctor->specialization ?? 'IVF & Reproductive Endocrinology' }}</p>
+                                       Special Interest :- {{ $doctor->profile->special_interest ?? 'Nothing' }}</p>
 
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="bg-[#f9f0f7] text-[#a53692] px-3 py-1 rounded-full text-xs">IVF</span>
-                                        <span
-                                            class="bg-[#f9f0f7] text-[#a53692] px-3 py-1 rounded-full text-xs">ICSI</span>
-                                        <span class="bg-[#f9f0f7] text-[#a53692] px-3 py-1 rounded-full text-xs">Egg
-                                            Freezing</span>
-                                    </div>
+                                  
 
                                     <div class="flex gap-2">
                                         <a href="{{ route('booking') }}"

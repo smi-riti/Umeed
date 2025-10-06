@@ -25,7 +25,7 @@
 
                         <!-- Experience Badge -->
                         <div class="absolute -bottom-4 -right-4 bg-[#a53692] text-white px-4 py-2 rounded-full">
-                            <span class="font-bold">15+</span> Years
+                            <span class="font-bold">{{$doctor->profile->experience ?? '0'}}</span> experience
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            15+ Years Experience
+                            {{ $doctor->profile->experience ?? '' }} experience
                         </div>
                     </div>
                 </div>
@@ -79,49 +79,26 @@
                     <div class="bg-white rounded-xl p-8 shadow-sm">
                         <h2 class="text-3xl font-bold text-gray-900 mb-6">About Dr. {{ $doctor->name }}</h2>
                         <div class="prose prose-lg max-w-none text-gray-600">
-                            <p>{{ $doctor->profile->professional_bio ?? 'Dr. ' . $doctor->name . ' is a highly experienced fertility specialist with extensive expertise in reproductive medicine. With a compassionate approach and commitment to patient care, Dr. ' . $doctor->name . ' has helped numerous couples achieve their dream of parenthood.' }}
+                            <p>{{ $doctor->profile->professional_bio ?? '' }}
                             </p>
                         </div>
                     </div>
 
-                    <!-- Specializations -->
+                   @if ($doctor->profile && $doctor->profile->special_interest)
+                    <!-- Special Interests -->
                     <div class="bg-white rounded-xl p-8 shadow-sm">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Areas of Expertise</h2>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div class="flex items-center">
-                                <svg class="w-6 h-6 text-[#a53692] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Special Interests</h2>
+                        <div class="prose flex prose-lg max-w-none text-gray-600">
+                             <svg class="w-6 h-6 text-[#a53692] mr-3" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                <span class="text-gray-700">IVF Treatment</span>
-                            </div>
-                            <div class="flex items-center">
-                                <svg class="w-6 h-6 text-[#a53692] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-gray-700">ICSI</span>
-                            </div>
-                            <div class="flex items-center">
-                                <svg class="w-6 h-6 text-[#a53692] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-gray-700">Egg Freezing</span>
-                            </div>
-                            <div class="flex items-center">
-                                <svg class="w-6 h-6 text-[#a53692] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-gray-700">Male Infertility</span>
-                            </div>
+                            <p>{{ $doctor->profile->special_interest }}</p>
                         </div>
                     </div>
+                       
+                   @endif
 
                     <!-- Qualifications & Achievements -->
                     <div class="bg-white rounded-xl p-8 shadow-sm">
@@ -133,10 +110,11 @@
                                     {{ $doctor->profile->qualification ?? 'MD - Obstetrics & Gynaecology, Fellowship in Reproductive Medicine' }}
                                 </p>
                             </div>
+
                             @if ($doctor->profile && $doctor->profile->achievements)
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900 mb-2">Achievements</h3>
-                                    <p class="text-gray-600">{{ $doctor->profile->achievements }}</p>
+                                    <p class="text-gray-600">{{ $doctor->profile->achievements ?? '' }}</p>
                                 </div>
                             @endif
                             @if ($doctor->profile && $doctor->profile->membership)
@@ -188,21 +166,14 @@
                     <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                         <h3 class="text-xl font-bold text-gray-900 mb-4">Contact Information</h3>
                         <div class="space-y-3">
-                            <div class="flex items-center text-gray-600">
-                                <svg class="w-5 h-5 mr-3 text-[#a53692]" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                </svg>
-                                <span>+91 98765 43210</span>
-                            </div>
+
                             <div class="flex items-center text-gray-600">
                                 <svg class="w-5 h-5 mr-3 text-[#a53692]" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
-                                <span>contact@umeedivf.com</span>
+                                <span>{{ $doctor->email ?? '' }}</span>
                             </div>
                         </div>
                     </div>
@@ -212,14 +183,103 @@
                         <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                             <h3 class="text-xl font-bold text-gray-900 mb-4">Languages Spoken</h3>
                             <div class="flex flex-wrap gap-2">
-                                @foreach (explode(',', $doctor->profile->language_spoken) as $language)
-                                    <span class="bg-[#f9f0f7] text-[#a53692] px-3 py-1 rounded-full text-sm">
-                                        {{ trim($language) }}
-                                    </span>
+                                @foreach ($doctor->profile->language_spoken as $language)
+                                    <span>{{ $language }},</span>
+                                @endforeach
+
+                            </div>
+                        </div>
+                    @endif
+
+
+
+                    @if (is_array($doctor->profile->social_media_link ?? '') && count($doctor->profile->social_media_link) > 0)
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Social Media Links</h3>
+                            <div class="flex gap-6">
+                                @foreach ($doctor->profile->social_media_link as $link)
+                                    @php
+                                        $platform = '';
+                                        $url = $link;
+
+                                        if (strpos($link, ':') !== false) {
+                                            [$platform, $url] = explode(':', $link, 2);
+                                            $platform = strtolower(trim($platform));
+                                        } else {
+                                            if (strpos($link, 'facebook') !== false) {
+                                                $platform = 'facebook';
+                                            } elseif (strpos($link, 'instagram') !== false) {
+                                                $platform = 'instagram';
+                                            } elseif (strpos($link, 'linkedin') !== false) {
+                                                $platform = 'linkedin';
+                                            } elseif (
+                                                strpos($link, 'twitter') !== false ||
+                                                strpos($link, 'x.com') !== false
+                                            ) {
+                                                $platform = 'twitter';
+                                            } elseif (strpos($link, 'youtube') !== false) {
+                                                $platform = 'youtube';
+                                            } else {
+                                                $platform = 'website';
+                                            }
+                                        }
+                                    @endphp
+
+                                    <a href="{{ $url }}" target="_blank"
+                                        class="text-gray-500 hover:text-[#a53692] transition-colors">
+                                        {{-- Facebook --}}
+                                        @if ($platform === 'facebook')
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.2 1.8.2v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12Z" />
+                                            </svg>
+                                        @endif
+
+                                        {{-- Instagram --}}
+                                        @if ($platform === 'instagram')
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.6 0 3 1.4 3 3v10c0 1.6-1.4 3-3 3H7c-1.6 0-3-1.4-3-3V7c0-1.6 1.4-3 3-3h10zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.8-2.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z" />
+                                            </svg>
+                                        @endif
+
+                                        {{-- LinkedIn --}}
+                                        @if ($platform === 'linkedin')
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8.3 19H5.7v-9h2.6v9zM7 8.3a1.5 1.5 0 1 1 0-3.1 1.5 1.5 0 0 1 0 3.1zm12 10.7h-2.6v-4.5c0-1.1 0-2.5-1.6-2.5s-1.9 1.2-1.9 2.5v4.5h-2.6v-9h2.5v1.2h.1c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.6V19z" />
+                                            </svg>
+                                        @endif
+
+                                        {{-- Twitter/X --}}
+                                        @if ($platform === 'twitter')
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.9-2.37c-.83.5-1.74.84-2.71 1.03a4.28 4.28 0 0 0-7.3 3.9A12.1 12.1 0 0 1 3.1 4.6a4.28 4.28 0 0 0 1.33 5.72 4.2 4.2 0 0 1-1.94-.54v.05a4.28 4.28 0 0 0 3.44 4.2 4.3 4.3 0 0 1-1.93.07 4.28 4.28 0 0 0 4 3 8.6 8.6 0 0 1-6.3 1.76A12.1 12.1 0 0 0 8.3 21c7.55 0 11.7-6.26 11.7-11.7v-.53c.8-.58 1.5-1.3 2-2.1z" />
+                                            </svg>
+                                        @endif
+
+                                        {{-- YouTube --}}
+                                        @if ($platform === 'youtube')
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M19.6 3.2H4.4C3.1 3.2 2 4.3 2 5.6v12.8c0 1.3 1.1 2.4 2.4 2.4h15.2c1.3 0 2.4-1.1 2.4-2.4V5.6c0-1.3-1.1-2.4-2.4-2.4zM10 16V8l6 4-6 4z" />
+                                            </svg>
+                                        @endif
+
+                                        {{-- Website Fallback --}}
+                                        @if ($platform === 'website')
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2c1.4 0 2.7.4 3.8 1.1l-8.7 8.7A8 8 0 0 1 12 4zm0 16a8 8 0 0 1-4.7-1.5l8.7-8.7A8 8 0 0 1 12 20z" />
+                                            </svg>
+                                        @endif
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
                     @endif
+
                 </div>
             </div>
         </div>

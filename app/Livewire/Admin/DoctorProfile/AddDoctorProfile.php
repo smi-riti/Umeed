@@ -20,6 +20,7 @@ class AddDoctorProfile extends Component
     public string $achievements = '';
     public string $language_spoken = '';
     public array $socialMediaLinks = [];
+    public string $experience = '';
 
     protected function rules()
     {
@@ -31,7 +32,9 @@ class AddDoctorProfile extends Component
             'social_media_link' => 'nullable|string|max:1000',
             'special_interest' => 'nullable|string|max:255',
             'achievements' => 'nullable|string|max:1000',
-            'language_spoken' => 'nullable|string|max:255'
+            'language_spoken' => 'nullable|string|max:255',
+            'experience' => 'nullable|string|max:255'
+
         ];
     }
 
@@ -44,7 +47,8 @@ class AddDoctorProfile extends Component
         'social_media_link.max' => 'Social media links cannot exceed 1000 characters.',
         'special_interest.max' => 'Special interest cannot exceed 255 characters.',
         'achievements.max' => 'Achievements cannot exceed 1000 characters.',
-        'language_spoken.max' => 'Languages spoken cannot exceed 255 characters.'
+        'language_spoken.max' => 'Languages spoken cannot exceed 255 characters.',
+        'experience.max' => 'Experience cannot exceed 255 characters.',
     ];
 
     public function save()
@@ -117,6 +121,8 @@ class AddDoctorProfile extends Component
                 'special_interest' => $this->special_interest ?: null,
                 'achievements' => $achievements,
                 'language_spoken' => $languages,
+                'experience' => $this->experience ?: null,
+
             ]);
 
             session()->flash('success', 'Doctor profile created successfully!');
