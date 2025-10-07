@@ -6,9 +6,7 @@ use App\Models\Doctor;
 use App\Models\Department;
 use App\Models\Enquiry;
 use App\Models\Testimonial;
-use Livewire\Attributes\Title;
 use Livewire\Component;
-#[Title("Umeed - Home")]
 class Homepage extends Component
 {
     

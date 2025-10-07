@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>{{ $title ?? config('app.name', 'Umeed IVF Hospital') }}</title>
+    <title>@yield("title")</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,12 +15,12 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     
     <!-- Meta Tags for SEO -->
-    <meta name="description" content="{{ $description ?? 'Leading fertility care with advanced technology, experienced doctors, and compassionate support. Umeed IVF Hospital - Your journey to parenthood begins here.' }}">
-    <meta name="keywords" content="{{ $keywords ?? 'IVF, fertility treatment, reproductive health, pregnancy, infertility, egg freezing, male infertility, embryo transfer' }}">
+    <meta name="description" content="@yield("description")">
+    <meta name="keywords" content="@yield("keywords")">
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="{{ $title ?? 'Umeed IVF Hospital - Leading Fertility Care' }}">
-    <meta property="og:description" content="{{ $description ?? 'Leading fertility care with advanced technology and compassionate support.' }}">
+    <meta property="og:title" content="@yield("title")">
+    <meta property="og:description" content="@yield("description")">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     

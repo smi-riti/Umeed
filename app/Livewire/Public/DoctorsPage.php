@@ -7,7 +7,6 @@ use App\Models\Department;
 use App\Models\Testimonial;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-#[Title("Our Doctors")]
 class DoctorsPage extends Component
 {
     public function render()
