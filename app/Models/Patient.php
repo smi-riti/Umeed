@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Patient extends Model
 {
     protected $fillable = [
-        'user_id',
+        
         'name',
         'phone',
         'email',
@@ -20,11 +20,6 @@ class Patient extends Model
     protected $casts = [
         'age' => 'integer',
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function appointments(): HasMany
     {

@@ -4,7 +4,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <h2 class="text-2xl font-bold text-gray-900">Edit Appointment</h2>
-                <p class="text-sm text-gray-600 mt-1">Update appointment details</p>
+                <p class="text-sm text-gray-600 mt-1">Update appointment and patient details</p>
             </div>
             <a wire:navigate 
                href="{{ route('admin.appointments.list') }}" 
@@ -46,121 +46,87 @@
 
     <!-- Form -->
     <form wire:submit="save" class="space-y-6">
-        <!-- Patient Selection -->
+        <!-- Patient Information -->
         <div class="bg-white border border-gray-200 rounded-lg p-6">
             <h3 class="text-lg font-medium text-gray-900 mb-4">Patient Information</h3>
             
-            <div class="mb-4">
-                <label class="flex items-center space-x-3">
-                    <input type="checkbox" 
-                           wire:model.live="use_existing_patient" 
-                           class="h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                    <span class="text-sm text-gray-700">Use existing patient</span>
-                </label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="patient_name" class="block text-sm font-medium text-gray-700 mb-1">
+                        Patient Name
+                    </label>
+                    <input type="text" 
+                           wire:model="patient_name" 
+                           id="patient_name"
+                           placeholder="Enter patient name"
+                           readonly
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-gray-100 cursor-not-allowed @error('patient_name') border-red-500 @enderror">
+                    @error('patient_name')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="patient_email" class="block text-sm font-medium text-gray-700 mb-1">
+                        Email Address <span class="text-red-500">*</span>
+                    </label>
+                    <input type="email" 
+                           wire:model="patient_email" 
+                           id="patient_email"
+                           placeholder="Enter email address"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 @error('patient_email') border-red-500 @enderror">
+                    @error('patient_email')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="patient_phone" class="block text-sm font-medium text-gray-700 mb-1">
+                        Phone Number
+                    </label>
+                    <input type="text" 
+                           wire:model="patient_phone" 
+                           id="patient_phone"
+                           placeholder="Enter phone number"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 @error('patient_phone') border-red-500 @enderror">
+                    @error('patient_phone')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="patient_gender" class="block text-sm font-medium text-gray-700 mb-1">
+                        Gender
+                    </label>
+                    <select wire:model="patient_gender" 
+                            id="patient_gender"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 @error('patient_gender') border-red-500 @enderror">
+                        <option value="">Select gender...</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    @error('patient_gender')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="patient_age" class="block text-sm font-medium text-gray-700 mb-1">
+                        Age
+                    </label>
+                    <input type="number" 
+                           wire:model="patient_age" 
+                           id="patient_age"
+                           placeholder="Enter age"
+                           min="1" 
+                           max="150"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 @error('patient_age') border-red-500 @enderror">
+                    @error('patient_age')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
-
-            @if($use_existing_patient)
-                <!-- Existing Patient Selection -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="md:col-span-2">
-                        <label for="existing_patient_id" class="block text-sm font-medium text-gray-700 mb-1">
-                            Select Patient <span class="text-red-500">*</span>
-                        </label>
-                        <select wire:model.live="existing_patient_id" 
-                                id="existing_patient_id"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 @error('existing_patient_id') border-red-500 @enderror">
-                            <option value="">Select a patient...</option>
-                            @foreach($patients as $patient)
-                                <option value="{{ $patient->id }}">
-                                    {{ $patient->name }} - {{ $patient->email }}
-                                    @if($patient->phone) - {{ $patient->phone }} @endif
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('existing_patient_id')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
-            @else
-                <!-- New Patient Form -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="patient_name" class="block text-sm font-medium text-gray-700 mb-1">
-                            Patient Name <span class="text-red-500">*</span>
-                        </label>
-                        <input type="text" 
-                               wire:model="patient_name" 
-                               id="patient_name"
-                               placeholder="Enter patient name"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 @error('patient_name') border-red-500 @enderror">
-                        @error('patient_name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="patient_email" class="block text-sm font-medium text-gray-700 mb-1">
-                            Email Address <span class="text-red-500">*</span>
-                        </label>
-                        <input type="email" 
-                               wire:model="patient_email" 
-                               id="patient_email"
-                               placeholder="Enter email address"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 @error('patient_email') border-red-500 @enderror">
-                        @error('patient_email')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="patient_phone" class="block text-sm font-medium text-gray-700 mb-1">
-                            Phone Number
-                        </label>
-                        <input type="text" 
-                               wire:model="patient_phone" 
-                               id="patient_phone"
-                               placeholder="Enter phone number"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 @error('patient_phone') border-red-500 @enderror">
-                        @error('patient_phone')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="patient_gender" class="block text-sm font-medium text-gray-700 mb-1">
-                            Gender
-                        </label>
-                        <select wire:model="patient_gender" 
-                                id="patient_gender"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 @error('patient_gender') border-red-500 @enderror">
-                            <option value="">Select gender...</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                        @error('patient_gender')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="patient_age" class="block text-sm font-medium text-gray-700 mb-1">
-                            Age
-                        </label>
-                        <input type="number" 
-                               wire:model="patient_age" 
-                               id="patient_age"
-                               placeholder="Enter age"
-                               min="1" 
-                               max="150"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 @error('patient_age') border-red-500 @enderror">
-                        @error('patient_age')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
-            @endif
         </div>
 
         <!-- Appointment Details -->

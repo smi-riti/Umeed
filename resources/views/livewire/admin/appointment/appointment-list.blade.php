@@ -6,14 +6,7 @@
                 <h2 class="text-2xl font-bold text-gray-800">Appointment Management</h2>
                 <p class="text-gray-500 mt-1">Schedule and manage patient appointments</p>
             </div>
-            <a wire:navigate 
-               href="{{ route('admin.appointments.add') }}"
-               class="inline-flex items-center px-4 py-2 bg-[#a53692] text-white text-sm font-medium rounded-md hover:bg-[#8c2d7c] focus:outline-none focus:ring-1 focus:ring-[#a53692] transition-colors">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                </svg>
-                Add Appointment
-            </a>
+          
         </div>
     </div>
 
@@ -121,7 +114,6 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Doctor</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date & Time</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created By</th>
                         <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
@@ -171,11 +163,7 @@
                                     {{ ucfirst($appointment->status) }}
                                 </span>
                             </td>
-                            
-                            <!-- Created By -->
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $appointment->createdBy->name ?? 'System' }}
-                            </td>
+                         
                             
                             <!-- Actions -->
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

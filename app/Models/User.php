@@ -53,10 +53,7 @@ class User extends Authenticatable
         return $this->hasOne(Doctor::class);
     }
 
-    public function patient(): HasOne
-    {
-        return $this->hasOne(Patient::class);
-    }
+  
 
     public function isAdmin(): bool
     {
@@ -68,8 +65,5 @@ class User extends Authenticatable
         return $this->role === 'doctor';
     }
 
-    public function isPatient(): bool
-    {
-        return $this->role === 'patient';
-    }
+   
 }
