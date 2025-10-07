@@ -33,15 +33,20 @@ use App\Livewire\Admin\DoctorProfile\EditDoctorProfile;
 use App\Livewire\Admin\Publication\ListPublication;
 use App\Livewire\Admin\Publication\AddPublication;
 use App\Livewire\Admin\Publication\EditPublication;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', Homepage::class)->name('home');
 
 Route::get("/storage-link", function(){
     try {
+        if(file_exists(public_path('storage'))) {
+            return 'The "public/storage" directory already exists.';
+        }
+
         Artisan::call('storage:link');
-        return "Storage link created successfully.";
+        return 'The [public/storage] directory has been linked.';
     } catch (\Exception $e) {
-        return "Error creating storage link: " . $e->getMessage();
+        return 'Error creating storage link: ' . $e->getMessage();
     }
 });
 
