@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'Umeed IVF Hospital - Leading Fertility Care')
+    @section('title', 'Umeed IVF Hospital | Patna | Bihar - Leading Fertility Care')
     @section('description',
         'Leading fertility care with advanced technology, experienced doctors, and compassionate
         support. We\'re here to help make your dream of parenthood a reality.')

@@ -4,11 +4,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="flex justify-between items-center">
             <!-- Logo -->
-            <div class="flex items-center">
+            <a href="{{ route('home') }}" class="flex items-center">
                 <img src="{{ asset("image.png") }}" class="sm:h-16 h-12" alt="">
-                
-            </div>
-            
+            </a>
+
             <!-- Navigation -->
             <nav class="hidden md:flex gap-8">
                 <a href="{{ route('home') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('home') ? 'text-[#a53692]' : '' }} transition-colors duration-300 py-2">Home</a>

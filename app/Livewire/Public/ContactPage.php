@@ -6,7 +6,6 @@ use App\Models\Enquiry;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-#[Title("Contact Us")]
 #[Layout('layouts.app')]
 class ContactPage extends Component
 {

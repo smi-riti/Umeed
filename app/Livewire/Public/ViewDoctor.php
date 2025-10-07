@@ -5,7 +5,6 @@ namespace App\Livewire\Public;
 use App\Models\Doctor;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-#[Title("Doctor's Profile")]
 class ViewDoctor extends Component
 {
     public $doctor;
