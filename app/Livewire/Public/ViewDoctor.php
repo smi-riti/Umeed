@@ -12,11 +12,12 @@ class ViewDoctor extends Component
     public $doctorId;
     public $user;
     
-    public function mount($id)
+    public function mount($slug)
     {
-        $this->doctorId = $id;
+        $this->doctorId = $slug;
         $this->doctor = Doctor::with(['department', 'user', 'profile'])
-                            ->findOrFail($id);
+                            ->where('slug', $slug)
+                            ->firstOrFail();
         $this->user = $this->doctor->user;
     }
 

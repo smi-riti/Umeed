@@ -41,7 +41,7 @@ Route::get('/doctors', DoctorsPage::class)->name('doctors');
 Route::get('/services', ServicesPage::class)->name('services');
 Route::get('/contact', ContactPage::class)->name('contact');
 Route::get('/booking', BookingPage::class)->name('booking');
-Route::get('/doctors/{id}',ViewDoctor::class)->name('view-doctor');
+Route::get('/doctors/{slug}',ViewDoctor::class)->name('view-doctor');
 
 
 Route::get('/', Homepage::class)->name('home');
