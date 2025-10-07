@@ -202,13 +202,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-9 4h12m-6 0v8"/>
                                     </svg>
                                     <h3 class="mt-2 text-sm font-medium text-gray-900">No appointments found</h3>
-                                    <p class="mt-1 text-sm text-gray-500">Get started by creating a new appointment.</p>
-                                    <div class="mt-6">
-                                        <a wire:navigate href="{{ route('admin.appointments.add') }}" 
-                                           class="inline-flex items-center px-4 py-2 border border-transparent  text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700">
-                                            Add Appointment
-                                        </a>
-                                    </div>
+                                    
                                 </div>
                             </td>
                         </tr>
