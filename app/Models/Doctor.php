@@ -51,9 +51,23 @@ class Doctor extends Model
     {
         return $this->hasMany(Publication::class);
     }
-  
+    // Accessor for name via user relationship
+    public function getNameAttribute(): string
+    {
+        return $this->user->name ?? '';
+    }
 
-  
+    // Accessor for email via user relationship
+    public function getEmailAttribute(): string
+    {
+        return $this->user->email ?? '';
+    }
+
+    // Get image URL or null
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
+    }
 
     // Get name initials for avatar
     public function getInitialsAttribute(): string

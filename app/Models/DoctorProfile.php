@@ -98,7 +98,11 @@ class DoctorProfile extends Model
         return 'website';
     }
     
- 
+    // Get doctor name from relation
+    public function getNameAttribute(): string
+    {
+        return $this->doctor->name ?? '';
+    }
     
     public function doctor(): BelongsTo
     {
