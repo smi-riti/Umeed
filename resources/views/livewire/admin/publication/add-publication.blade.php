@@ -70,8 +70,8 @@
                                    wire:model="doctor_id" 
                                    class="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a53692] focus:border-[#a53692] transition-all bg-gray-50 hover:bg-white appearance-none">
                                 <option value="">Select Doctor Profile</option>
-                                @foreach($doctorProfiles as $profile)
-                                    <option value="{{ $profile->id }}">{{ $profile->name }}</option>
+                                @foreach($doctorProfiles as $doctor)
+                                    <option value="{{ $doctor->id }}">{{ $doctor->user->name }}</option>
                                 @endforeach
                             </select>
                             <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">

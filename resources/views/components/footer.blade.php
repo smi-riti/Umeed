@@ -100,20 +100,7 @@
             </div>
         </div>
         
-        <!-- Emergency Contact -->
-        <div class="border-t border-gray-800 mt-8 pt-8">
-            <div class="bg-[#5a1a4d] rounded-lg p-4 mb-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="text-lg font-semibold text-white mb-1">24/7 Emergency Support</h4>
-                        <p class="text-[#dea5cf]">For urgent fertility concerns and emergencies</p>
-                    </div>
-                    <a href="tel:+15551234999" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-md font-semibold transition-colors">
-                        Emergency: (555) 123-4999
-                    </a>
-                </div>
-            </div>
-        </div>
+        
         
         <!-- Copyright -->
         <div class="border-t border-gray-800 pt-8 text-center text-gray-400">

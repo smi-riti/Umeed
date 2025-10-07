@@ -1,5 +1,10 @@
 <?php
 
+use App\Livewire\Admin\Enquirie\EnquiryList;
+use App\Livewire\Admin\Patient\ManagePatient;
+use App\Livewire\Admin\Review\ReviewCreate;
+use App\Livewire\Admin\Review\ReviewList;
+use App\Livewire\Public\ViewDoctor;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Public\Homepage;
 
@@ -36,6 +41,7 @@ Route::get('/doctors', DoctorsPage::class)->name('doctors');
 Route::get('/services', ServicesPage::class)->name('services');
 Route::get('/contact', ContactPage::class)->name('contact');
 Route::get('/booking', BookingPage::class)->name('booking');
+Route::get('/doctors/{slug}',ViewDoctor::class)->name('view-doctor');
 
 
 Route::get('/', Homepage::class)->name('home');
@@ -74,4 +80,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/publications', ListPublication::class)->name('publications.list');
     Route::get('/publications/add', AddPublication::class)->name('publications.add');
     Route::get('/publications/edit/{publication}', EditPublication::class)->name('publications.edit');
+
+    // enquiry list
+    Route::get('/enquiries', EnquiryList::class)->name('enquiries');
+
+    //review create
+    Route::get('/review', ReviewList::class)->name('review-create');
+
+    //manage patients
+    Route::get('/patients', ManagePatient::class)->name('patients');
 });

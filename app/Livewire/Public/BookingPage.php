@@ -242,6 +242,6 @@ class BookingPage extends Component
         return view('livewire.public.booking-page', [
             'doctors' => $doctors,
             'departments' => $departments
-        ]);
+        ])->layout('layouts.app');
     }
 }

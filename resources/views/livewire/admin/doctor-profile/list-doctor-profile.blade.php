@@ -1,4 +1,7 @@
 <div>
+    <!-- Delete Confirmation Modal -->
+    <livewire:components.delete-confirmation />
+    
     <div class="container mx-auto px-4 py-6">
         <!-- Header -->
         <div class="bg-white border border-gray-200 rounded-lg mb-8 p-6">
@@ -105,6 +108,7 @@
                                 </div>
                             </th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Special Interest</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Social Media</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Languages</th>
                             <th wire:click="sortBy('created_at')" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100">
                                 <div class="flex items-center space-x-1">
@@ -127,7 +131,7 @@
                         @forelse($profiles as $profile)
                             <tr class="hover:bg-gray-50 transition-colors">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $profile->name }}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ $profile->doctor->name ?? 'N/A' }}</div>
                                     @if($profile->membership)
                                         <div class="text-sm text-gray-500">{{ $profile->membership }}</div>
                                     @endif
@@ -139,7 +143,60 @@
                                     <div class="text-sm text-gray-900">{{ $profile->special_interest ?: 'N/A' }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $profile->language_spoken ?: 'N/A' }}</div>
+                                    @if(is_array($profile->social_media_link) && count($profile->social_media_link) > 0)
+                                        <div class="flex space-x-2">
+                                            @foreach($profile->social_media_link as $link)
+                                                @php
+                                                    $platform = '';
+                                                    $url = $link;
+                                                    
+                                                    if (strpos($link, ':') !== false) {
+                                                        list($platform, $url) = explode(':', $link, 2);
+                                                        $platform = strtolower(trim($platform));
+                                                    } else {
+                                                        if (strpos($link, 'facebook') !== false) {
+                                                            $platform = 'facebook';
+                                                        } elseif (strpos($link, 'instagram') !== false) {
+                                                            $platform = 'instagram';
+                                                        } elseif (strpos($link, 'linkedin') !== false) {
+                                                            $platform = 'linkedin';
+                                                        } elseif (strpos($link, 'twitter') !== false || strpos($link, 'x.com') !== false) {
+                                                            $platform = 'twitter';
+                                                        } elseif (strpos($link, 'youtube') !== false) {
+                                                            $platform = 'youtube';
+                                                        } else {
+                                                            $platform = 'website';
+                                                        }
+                                                    }
+                                                @endphp
+                                                
+                                                <a href="{{ $url }}" target="_blank" class="text-[#a53692] hover:text-[#8c2d7c] px-2 py-1 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors">
+                                                    @if($platform == 'facebook')
+                                                        <span title="{{ $url }}">FB</span>
+                                                    @elseif($platform == 'instagram')
+                                                        <span title="{{ $url }}">IG</span>
+                                                    @elseif($platform == 'linkedin')
+                                                        <span title="{{ $url }}">LI</span>
+                                                    @elseif($platform == 'twitter')
+                                                        <span title="{{ $url }}">TW</span>
+                                                    @elseif($platform == 'youtube')
+                                                        <span title="{{ $url }}">YT</span>
+                                                    @else
+                                                        <span title="{{ $url }}">Web</span>
+                                                    @endif
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <div class="text-sm text-gray-900">N/A</div>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if(is_array($profile->language_spoken) && count($profile->language_spoken) > 0)
+                                        <div class="text-sm text-gray-900">{{ implode(', ', $profile->language_spoken) }}</div>
+                                    @else
+                                        <div class="text-sm text-gray-900">{{ $profile->language_spoken ?: 'N/A' }}</div>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ $profile->created_at->format('M j, Y') }}
@@ -150,8 +207,7 @@
                                            class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1 rounded-md text-xs font-medium transition-colors">
                                             Edit
                                         </a>
-                                        <button wire:click="delete({{ $profile->id }})" 
-                                                onclick="return confirm('Are you sure you want to delete this profile?')"
+                                        <button wire:click="confirmDelete({{ $profile->id }})" 
                                                 class="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-md text-xs font-medium transition-colors">
                                             Delete
                                         </button>

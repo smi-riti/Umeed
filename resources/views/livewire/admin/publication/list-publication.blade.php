@@ -1,4 +1,7 @@
 <div>
+    <!-- Delete Confirmation Modal -->
+    <livewire:components.delete-confirmation />
+    
     <div class="container mx-auto px-4 py-6">
         <!-- Header -->
         <div class="bg-white border border-gray-200 rounded-lg mb-8 p-6">
@@ -128,7 +131,7 @@
                                     <div class="text-sm font-medium text-gray-900 line-clamp-2">{{ $publication->title }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $publication->doctorProfile->name ?? 'N/A' }}</div>
+                                    <div class="text-sm text-gray-900">{{ $publication->doctor->name ?? 'N/A' }}</div>
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="text-sm text-gray-900 line-clamp-2">{{ $publication->authors ?: 'N/A' }}</div>
@@ -156,8 +159,7 @@
                                            class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1 rounded-md text-xs font-medium transition-colors">
                                             Edit
                                         </a>
-                                        <button wire:click="delete({{ $publication->id }})" 
-                                                onclick="return confirm('Are you sure you want to delete this publication?')"
+                                        <button wire:click="confirmDelete({{ $publication->id }})"
                                                 class="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-md text-xs font-medium transition-colors">
                                             Delete
                                         </button>
