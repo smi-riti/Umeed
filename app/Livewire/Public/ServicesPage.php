@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Public;
 
+use Livewire\Attributes\Title;
 use Livewire\Component;
-
 class ServicesPage extends Component
 {
     public function render()

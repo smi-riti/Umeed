@@ -3,19 +3,20 @@
 namespace App\Livewire\Public;
 
 use App\Models\Doctor;
+use Livewire\Attributes\Title;
 use Livewire\Component;
-
 class ViewDoctor extends Component
 {
     public $doctor;
     public $doctorId;
     public $user;
     
-    public function mount($id)
+    public function mount($slug)
     {
-        $this->doctorId = $id;
-        $this->doctor = Doctor::with(['department', 'user'])
-                            ->findOrFail($id);
+        $this->doctorId = $slug;
+        $this->doctor = Doctor::with(['department', 'user', 'profile'])
+                            ->where('slug', $slug)
+                            ->firstOrFail();
         $this->user = $this->doctor->user;
     }
 

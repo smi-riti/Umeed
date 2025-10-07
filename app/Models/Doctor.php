@@ -33,6 +33,11 @@ class Doctor extends Model
     {
         return $this->belongsTo(Department::class);
     }
+    public function profile()
+{
+    return $this->hasOne(DoctorProfile::class);
+}
+
 
     public function appointments(): HasMany
     {
