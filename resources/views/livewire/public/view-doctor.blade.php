@@ -1,4 +1,6 @@
 <div>
+       @section('title', 'Doctor Profile - Umeed IVF Hospital')
+    @section('description', 'Umeed IVF Hospitals is committed to advanced fertility care with compassion, trust, and excellence. Our expert team helps couples achieve their dream of parenthood through personalized treatment and support.')
     <!-- Hero Section -->
     <section class="bg-[#f9f0f7] py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,15 +23,12 @@
                                 </svg>
                             </div>
                         @endif
-
-
                         <!-- Experience Badge -->
                         <div class="absolute -bottom-4 -right-4 bg-[#a53692] text-white px-4 py-2 rounded-full">
                             <span class="font-bold">{{$doctor->profile->experience ?? '0'}}</span> experience
                         </div>
                     </div>
                 </div>
-
                 <!-- Doctor Info -->
                 <div class="md:col-span-2 text-center md:text-left">
                     <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ $doctor->name }}</h1>
