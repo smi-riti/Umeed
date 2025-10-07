@@ -17,7 +17,7 @@ use App\Livewire\Public\BookingPage;
 use Illuminate\Support\Facades\Auth;
 
 use App\Livewire\Auth\Login;
-use App\Livewire\Auth\Register;    
+use App\Livewire\Auth\Register;
 use App\Livewire\Admin\Page\Dashboard;
 use App\Livewire\Admin\Department\DepartmentList;
 use App\Livewire\Admin\Department\DepartmentForm;
@@ -35,6 +35,11 @@ use App\Livewire\Admin\Publication\AddPublication;
 use App\Livewire\Admin\Publication\EditPublication;
 
 Route::get('/', Homepage::class)->name('home');
+
+Route::get("/storage-link", function(){
+    \Artisan::call("storage:link");
+    return "Storage link created successfully.";
+});
 
 Route::get('/about', AboutPage::class)->name('about');
 Route::get('/doctors', DoctorsPage::class)->name('doctors');
@@ -55,27 +60,27 @@ Route::post('/logout', function () {
 // Admin routes with middleware
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
-    
+
     // Department routes
     Route::get('/departments', DepartmentList::class)->name('departments.list');
     Route::get('/departments/add', DepartmentForm::class)->name('departments.add');
     Route::get('/departments/edit/{departmentId}', DepartmentForm::class)->name('departments.edit');
-    
+
     // Doctor routes
     Route::get('/doctors', ListDoctor::class)->name('doctors.list');
     Route::get('/doctors/add', AddDoctor::class)->name('doctors.add');
     Route::get('/doctors/edit/{doctor}', EditDoctor::class)->name('doctors.edit');
-    
+
     // Appointment routes
     Route::get('/appointments', AppointmentList::class)->name('appointments.list');
     Route::get('/appointments/add', AppointmentForm::class)->name('appointments.add');
     Route::get('/appointments/edit/{appointmentId}', EditAppointment::class)->name('appointments.edit');
-    
+
     // Doctor Profile routes
     Route::get('/doctor-profiles', ListDoctorProfile::class)->name('doctor-profiles.list');
     Route::get('/doctor-profiles/add', AddDoctorProfile::class)->name('doctor-profiles.add');
     Route::get('/doctor-profiles/edit/{profile}', EditDoctorProfile::class)->name('doctor-profiles.edit');
-    
+
     // Publication routes
     Route::get('/publications', ListPublication::class)->name('publications.list');
     Route::get('/publications/add', AddPublication::class)->name('publications.add');
