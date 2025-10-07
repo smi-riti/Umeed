@@ -37,8 +37,12 @@ use App\Livewire\Admin\Publication\EditPublication;
 Route::get('/', Homepage::class)->name('home');
 
 Route::get("/storage-link", function(){
-    \Artisan::call("storage:link");
-    return "Storage link created successfully.";
+    try {
+        Artisan::call('storage:link');
+        return "Storage link created successfully.";
+    } catch (\Exception $e) {
+        return "Error creating storage link: " . $e->getMessage();
+    }
 });
 
 Route::get('/about', AboutPage::class)->name('about');
