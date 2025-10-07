@@ -70,7 +70,7 @@
                     <span class="ml-3 text-sm font-medium">Doctors Profile</span>
                 </a>
 
-                <a wire:navigate href=""
+                <a wire:navigate href="{{ route('admin.patients') }}"
                     class="group flex items-center px-3 py-3 rounded-lg text-gray-800 hover:bg-[#f9f0f7] hover:text-[#a53692] transition-all">
                     <svg class="h-5 w-5 text-gray-500 group-hover:text-[#a53692] transition-colors"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
