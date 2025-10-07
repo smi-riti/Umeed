@@ -34,17 +34,25 @@ use App\Livewire\Admin\Publication\ListPublication;
 use App\Livewire\Admin\Publication\AddPublication;
 use App\Livewire\Admin\Publication\EditPublication;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 Route::get('/', Homepage::class)->name('home');
 
 Route::get('/symlink', function () {
-  $target = storage_path('app/public');
-  $link = public_path('storage');
-  if (!file_exists($link)) {
-    symlink($target, $link);
-    return 'The [public/storage] directory has been linked.';
-  }
-  return 'The link already exists.';
+    try {
+        if (File::exists(public_path('storage'))) {
+            return 'The symbolic link already exists.';
+        }
+
+        File::link(
+            storage_path('app/public'),
+            public_path('storage')
+        );
+
+        return 'Symbolic link has been created successfully.';
+    } catch (\Exception $e) {
+        return 'Error creating symbolic link: ' . $e->getMessage();
+    }
 });
 
 Route::get('/about', AboutPage::class)->name('about');
