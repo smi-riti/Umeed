@@ -37,17 +37,14 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', Homepage::class)->name('home');
 
-Route::get("/storage-link", function(){
-    try {
-        if(file_exists(public_path('storage'))) {
-            return 'The "public/storage" directory already exists.';
-        }
-
-        Artisan::call('storage:link');
-        return 'The [public/storage] directory has been linked.';
-    } catch (\Exception $e) {
-        return 'Error creating storage link: ' . $e->getMessage();
-    }
+Route::get('/symlink', function () {
+  $target = storage_path('app/public');
+  $link = public_path('storage');
+  if (!file_exists($link)) {
+    symlink($target, $link);
+    return 'The [public/storage] directory has been linked.';
+  }
+  return 'The link already exists.';
 });
 
 Route::get('/about', AboutPage::class)->name('about');
