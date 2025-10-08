@@ -14,7 +14,6 @@ class ManagePatient extends Component
 
     public $patients = [];
     public $selectedPatient = null;
-    public $showDetails = false;
 
     public function mount()
     {
@@ -24,20 +23,9 @@ class ManagePatient extends Component
     public function loadPatients()
     {
         // Load all patients (no user relationship anymore)
-        $this->patients = Patient::all()->toArray();
+        $this->patients = Patient::all();
     }
 
-    public function showPatientDetails($patientId)
-    {
-        $this->selectedPatient = Patient::findOrFail($patientId);
-        $this->showDetails = true;
-    }
-
-    public function closeDetails()
-    {
-        $this->showDetails = false;
-        $this->selectedPatient = null;
-    }
 
     public function deletePatient($patientId)
     {
