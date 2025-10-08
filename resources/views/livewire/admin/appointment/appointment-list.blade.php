@@ -211,6 +211,7 @@
                                             Add Appointment
                                         </a>
                                     </div>
+                                    
                                 </div>
                             </td>
                         </tr>

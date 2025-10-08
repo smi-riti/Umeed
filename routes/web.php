@@ -57,7 +57,19 @@ Route::get('/symlink', function () {
         return 'Error creating symbolic link: ' . $e->getMessage();
     }
 });
-
+Route::get('/run-migrations', function () {
+    Artisan::call('migrate', ["--force" => true]);
+    return "Migrations ran successfully.";
+});
+Route::get('/fresh-migrations', function () {
+    Artisan::call('migrate:fresh', ["--force" => true]);
+    return "Database wiped and migrations ran successfully.";
+});
+// Run all seeders
+Route::get('/run-seeders', function () {
+    Artisan::call('db:seed', ["--force" => true]);
+    return "All seeders ran successfully.";
+});
 Route::get('/about', AboutPage::class)->name('about');
 Route::get('/doctors', DoctorsPage::class)->name('doctors');
 Route::get('/services', ServicesPage::class)->name('services');
@@ -114,4 +126,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     //manage patients
     Route::get('/patients', ManagePatient::class)->name('patients');
     Route::get('/patients/view/{id}', ViewPatient::class)->name('patients.view');
+
+
+
 });

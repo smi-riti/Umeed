@@ -134,7 +134,7 @@
             </nav>
 
             <!-- Financial Management -->
-            <div class="px-4 pt-5 pb-2">
+            {{-- <div class="px-4 pt-5 pb-2">
                 <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Financial</p>
             </div>
             <nav class="space-y-1 px-3">
@@ -157,7 +157,7 @@
                     </svg>
                     <span class="ml-3 text-sm font-medium">Reports</span>
                 </a>
-            </nav>
+            </nav> --}}
         </div>
 
         <!-- User Profile Section -->
