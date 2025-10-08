@@ -142,7 +142,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">User Account</label>
                         <p class="mt-1 text-sm text-gray-900">
-                            Registered: {{ $selectedPatient->user->created_at->format('M d, Y') }}
+                            Registered: {{  $selectedPatient->created_at->format('M d, Y')  }}
                         </p>
                     </div>
                 </div>

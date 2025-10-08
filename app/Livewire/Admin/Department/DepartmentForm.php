@@ -67,7 +67,7 @@ class DepartmentForm extends Component
             }
 
             session()->flash('message', $message);
-            $this->redirectRoute('admin.departments.list', navigate: true);
+            $this->redirectRoute('admin.departments.list');
         } catch (\Exception $e) {
             $this->addError('general', 'An error occurred while saving the department.');
         }

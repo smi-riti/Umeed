@@ -172,11 +172,8 @@
                             Thank you for submitting your appointment request. We've sent a confirmation email to <span class="font-medium">{{ $email }}</span>. 
                             Our team will contact you within 24 hours to confirm your appointment details.
                         </p>
-                        <div class="border-t border-gray-200 pt-6">
-                            <p class="font-medium mb-2">Reference Number: <span class="text-[#a53692]">{{ $reference_number }}</span></p>
-                            <p class="text-sm text-gray-500 mb-6">Please save this reference number for future communications.</p>
-                            
-                            <a href="{{ route('home') }}" class="inline-block px-6 py-3 bg-[#a53692] text-white font-medium rounded-md hover:bg-[#8c2b7b] transition-colors">
+                        <div class="border-t border-gray-200 pt-6">                            
+                            <a wire:navigate href="{{ route('home') }}" class="inline-block px-6 py-3 bg-[#a53692] text-white font-medium rounded-md hover:bg-[#8c2b7b] transition-colors">
                                 Return to Homepage
                             </a>
                         </div>

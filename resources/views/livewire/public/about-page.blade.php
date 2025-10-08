@@ -220,30 +220,30 @@
                             <!-- Founder -->
                             <div class="bg-white rounded-lg overflow-hidden">
                                 <div class="h-64 bg-gray-200">
-                                    @if ($doctor->image)
-                                        <img src="{{ asset('storage/' . $doctor->image) }}" alt="Dr. {{ $doctor->name }}"
-                                            class="w-full h-full object-cover"
-                                            onerror="this.src='https://via.placeholder.com/400x400?text=Dr.+Priya+Sharma';this.onerror='';">
-                                    @else
-                                        <div class="absolute inset-0 flex items-center justify-center">
-                                            <div
-                                                class="w-32 h-32 rounded-full bg-white/80 flex items-center justify-center backdrop-blur-sm">
-                                                <svg class="w-16 h-16 text-black" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    @endif
+                                   <div class="h-64 bg-gray-200 flex items-center justify-center">
+    @if ($doctor->image)
+        <img src="{{ asset('storage/' . $doctor->image) }}" 
+             alt="Dr. {{ $doctor->name }}"
+             class="w-full h-full object-cover"
+             onerror="this.src='https://via.placeholder.com/400x400?text=Dr.+{{ urlencode($doctor->name) }}';this.onerror='';">
+    @else
+        <div class="flex items-center justify-center w-full h-full">
+            <svg class="w-24 h-24 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" 
+                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" 
+                      clip-rule="evenodd" />
+            </svg>
+        </div>
+    @endif
+</div>
+
                                 </div>
                                 <div class="p-6">
                                     <span
                                         class="inline-block px-3 py-1 text-xs font-semibold text-[#a53692] bg-[#f9f0f7] rounded-full mb-3">
                                         {{ $doctor->department->name }}
                                     </span>
-                                    <h3 class="text-xl font-bold text-gray-900 mb-1">Dr. {{ $doctor->name }}</h3>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-1">Dr. {{ $doctor->user->name }}</h3>
                                     <p class="text-[#a53692] font-medium mb-4">{{ $doctor->specialty }}</p>
                                     @if ($doctor->profile && $doctor->profile->qualification)
                                         <p class="text-gray-600 text-sm font-semibold mb-4">Qualification :- <span
