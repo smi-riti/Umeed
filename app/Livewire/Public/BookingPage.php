@@ -27,7 +27,6 @@ class BookingPage extends Component
     public $notes;
     
     // Success data
-    public $reference_number;
     
     // Form data - Agreement
     public $terms_accepted = false;
@@ -106,7 +105,6 @@ class BookingPage extends Component
             ]);
             
             // Generate reference number for display
-            $this->reference_number = 'UMEED-' . strtoupper(substr(md5($appointment->id . time()), 0, 8));
         });
         
         // Move to success step

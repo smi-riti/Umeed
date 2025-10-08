@@ -10,7 +10,7 @@
                     <div class="relative">
                         @if ($doctor->image)
                             <div class="w-64 h-64 rounded-full overflow-hidden bg-gray-200">
-                                <img src="{{ asset('storage/' . $doctor->image) }}" alt="Dr. {{ $doctor->name }}"
+                                <img src="{{ asset('storage/' . $doctor->image) }}" alt="Dr. {{ $doctor->user->name }}"
                                     class="w-full h-full object-cover"
                                     onerror="this.src='https://via.placeholder.com/400x400?text=Dr.{{ urlencode($doctor->name) }}';this.onerror='';">
                             </div>
@@ -31,7 +31,7 @@
                 </div>
                 <!-- Doctor Info -->
                 <div class="md:col-span-2 text-center md:text-left">
-                    <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ $doctor->name }}</h1>
+                    <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ $doctor->user->name }}</h1>
                     <p class="text-xl text-[#a53692] font-medium mb-4">
                         {{ $doctor->department->name }}
                     </p>
@@ -76,7 +76,7 @@
                 <div class="lg:col-span-2 space-y-12">
                     <!-- About Section -->
                     <div class="bg-white rounded-xl p-8 shadow-sm">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-6">About Dr. {{ $doctor->name }}</h2>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">About Dr. {{ $doctor->user->name }}</h2>
                         <div class="prose prose-lg max-w-none text-gray-600">
                             <p>{{ $doctor->profile->professional_bio ?? '' }}
                             </p>

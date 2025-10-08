@@ -65,10 +65,10 @@
                             <div class="bg-white rounded-lg overflow-hidden">
                                 <div class="h-64 bg-gray-200 bg-[#f9f0f7] relative">
                                     @if ($doctor->image)
-                                     <img src="{{ asset('storage/' . $doctor->image) }}" alt="Dr. {{ $doctor->name }}"
+                                     <img src="{{ asset('storage/' . $doctor->image) }}" alt="Dr. {{ $doctor->user->name }}"
                                         class="w-full h-full object-cover"
-                                        onerror="this.src='https://via.placeholder.com/400x400?text=Dr.{{ urlencode($doctor->name) }}';this.onerror='';">
-                                        
+                                        onerror="this.src='https://via.placeholder.com/400x400?text=Dr.{{ urlencode($doctor->user->name) }}';this.onerror='';">
+
                                     @else
                                     <div class="absolute inset-0 flex items-center justify-center">
                                             <div
@@ -89,7 +89,7 @@
                                         class="inline-block px-3 py-1 text-xs font-semibold text-[#a53692] bg-[#f9f0f7] rounded-full mb-3">
                                         {{ $doctor->department->name }}
                                     </span>
-                                    <h3 class="text-xl font-bold text-gray-900 mb-1">Dr. {{ $doctor->name }}</h3>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-1">Dr. {{ $doctor->user->name }}</h3>
                                     <p class="text-[#a53692] font-medium mb-4">{{ $doctor->specialty }}</p>
                                     <p class="text-gray-600 text-sm mb-4">{{ Str::limit($doctor->profile->professional_bio ?? '', 80) }}</p>
                                     <p class="text-[#a53692] font-medium mb-4">{{ $doctor->profile->qualification ?? '' }}</p>
