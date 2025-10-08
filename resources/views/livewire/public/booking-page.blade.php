@@ -4,6 +4,7 @@
 
     <!-- Hero Section -->
     <section class="bg-[#f9f0f7] pt-24 pb-16 relative">
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Book an Appointment</h1>
@@ -23,8 +24,13 @@
                 <span class="text-sm font-semibold text-[#a53692] tracking-wider uppercase">Schedule Now</span>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-6">Online Appointment Request</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Complete the steps below and we'll contact you within 24 hours to confirm your appointment
+                    Complete the steps below and we'll contact you within 24 hours to confirm your appointment.
+                    <a wire:navigate href="{{ route('manage-appointment') }}" class="text-[#a53694] hover:underline">Already have an appointment? Check Existing appointment</a>
+
                 </p>
+
+
+
             </div>
             
             <div class="bg-white rounded-lg p-8 shadow-md">

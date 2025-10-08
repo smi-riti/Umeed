@@ -83,116 +83,273 @@
             </div>
         </div>
 
-        <!-- Publications Table -->
-        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th wire:click="sortBy('title')" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100">
-                                <div class="flex items-center space-x-1">
-                                    <span>Title</span>
-                                    @if($sortBy === 'title')
-                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            @if($sortDirection === 'asc')
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-                                            @else
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                            @endif
-                                        </svg>
-                                    @endif
-                                </div>
-                            </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Doctor</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Authors</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Journal</th>
-                            <th wire:click="sortBy('publication_year')" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100">
-                                <div class="flex items-center space-x-1">
-                                    <span>Year</span>
-                                    @if($sortBy === 'publication_year')
-                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            @if($sortDirection === 'asc')
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-                                            @else
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                            @endif
-                                        </svg>
-                                    @endif
-                                </div>
-                            </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link</th>
-                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse($publications as $publication)
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4">
-                                    <div class="text-sm font-medium text-gray-900 line-clamp-2">{{ $publication->title }}</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $publication->doctor->name ?? 'N/A' }}</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900 line-clamp-2">{{ $publication->authors ?: 'N/A' }}</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900 line-clamp-2">{{ $publication->journal ?: 'N/A' }}</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $publication->publication_year ?: 'N/A' }}</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($publication->link)
-                                        <a href="{{ $publication->link }}" target="_blank" class="text-[#a53692] hover:text-[#8c2d7c] text-sm font-medium">
-                                            <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                            </svg>
-                                        </a>
+      <!-- Publications Table -->
+<div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+    <!-- Desktop Table (hidden on mobile) -->
+    <div class="hidden lg:block overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th wire:click="sortBy('title')" class="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center space-x-1">
+                            <span>Title</span>
+                            @if($sortBy === 'title')
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if($sortDirection === 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
                                     @else
-                                        <span class="text-gray-400 text-sm">N/A</span>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                     @endif
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex items-center justify-end space-x-2">
-                                        <a href="{{ route('admin.publications.edit', $publication) }}" 
-                                           class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1 rounded-md text-xs font-medium transition-colors">
-                                            Edit
-                                        </a>
-                                        <button wire:click="confirmDelete({{ $publication->id }})"
-                                                class="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-md text-xs font-medium transition-colors">
-                                            Delete
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="px-6 py-12 text-center">
-                                    <div class="flex flex-col items-center">
-                                        <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                        </svg>
-                                        <h3 class="text-lg font-medium text-gray-900 mb-1">No publications found</h3>
-                                        <p class="text-gray-500 mb-4">Get started by adding your first publication.</p>
-                                        <a href="{{ route('admin.publications.add') }}" 
-                                           class="bg-[#a53692] hover:bg-[#8c2d7c] text-white px-4 py-2 rounded-md font-medium transition-colors">
-                                            Add Publication
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+                                </svg>
+                            @endif
+                        </div>
+                    </th>
+                    <th class="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Doctor</th>
+                    <th class="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Authors</th>
+                    <th class="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Journal</th>
+                    <th wire:click="sortBy('publication_year')" class="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center space-x-1">
+                            <span>Year</span>
+                            @if($sortBy === 'publication_year')
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if($sortDirection === 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                    @else
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    @endif
+                                </svg>
+                            @endif
+                        </div>
+                    </th>
+                    <th class="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link</th>
+                    <th class="px-4 xl:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                @forelse($publications as $publication)
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-4 xl:px-6 py-4">
+                            <div class="text-sm font-medium text-gray-900 line-clamp-2">{{ $publication->title }}</div>
+                        </td>
+                        <td class="px-4 xl:px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">{{ $publication->doctor->name ?? 'N/A' }}</div>
+                        </td>
+                        <td class="px-4 xl:px-6 py-4">
+                            <div class="text-sm text-gray-900 line-clamp-2">{{ $publication->authors ?: 'N/A' }}</div>
+                        </td>
+                        <td class="px-4 xl:px-6 py-4">
+                            <div class="text-sm text-gray-900 line-clamp-2">{{ $publication->journal ?: 'N/A' }}</div>
+                        </td>
+                        <td class="px-4 xl:px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">{{ $publication->publication_year ?: 'N/A' }}</div>
+                        </td>
+                        <td class="px-4 xl:px-6 py-4 whitespace-nowrap">
+                            @if($publication->link)
+                                <a href="{{ $publication->link }}" target="_blank" class="text-[#a53692] hover:text-[#8c2d7c] text-sm font-medium">
+                                    <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                </a>
+                            @else
+                                <span class="text-gray-400 text-sm">N/A</span>
+                            @endif
+                        </td>
+                        <td class="px-4 xl:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <div class="flex items-center justify-end space-x-2">
+                                <a href="{{ route('admin.publications.edit', $publication) }}" 
+                                   class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1 rounded-md text-xs font-medium transition-colors">
+                                    Edit
+                                </a>
+                                <button wire:click="confirmDelete({{ $publication->id }})"
+                                        class="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-md text-xs font-medium transition-colors">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7" class="px-6 py-12 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <h3 class="text-lg font-medium text-gray-900 mb-1">No publications found</h3>
+                                <p class="text-gray-500 mb-4">Get started by adding your first publication.</p>
+                                <a href="{{ route('admin.publications.add') }}" 
+                                   class="bg-[#a53692] hover:bg-[#8c2d7c] text-white px-4 py-2 rounded-md font-medium transition-colors">
+                                    Add Publication
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 
-            <!-- Pagination -->
-            @if($publications->hasPages())
-                <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                    {{ $publications->links() }}
+    <!-- Tablet Layout (shown on md and lg) -->
+    <div class="hidden md:block lg:hidden overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th wire:click="sortBy('title')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center space-x-1">
+                            <span>Title</span>
+                            @if($sortBy === 'title')
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if($sortDirection === 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                    @else
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    @endif
+                                </svg>
+                            @endif
+                        </div>
+                    </th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Doctor</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Journal</th>
+                    <th wire:click="sortBy('publication_year')" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center space-x-1">
+                            <span>Year</span>
+                            @if($sortBy === 'publication_year')
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    @if($sortDirection === 'asc')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                    @else
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    @endif
+                                </svg>
+                            @endif
+                        </div>
+                    </th>
+                    <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                @forelse($publications as $publication)
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-4 py-4">
+                            <div class="text-sm font-medium text-gray-900 line-clamp-2">{{ $publication->title }}</div>
+                            <div class="text-xs text-gray-500 mt-1 line-clamp-1">{{ $publication->authors ?: 'N/A' }}</div>
+                        </td>
+                        <td class="px-4 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">{{ $publication->doctor->name ?? 'N/A' }}</div>
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="text-sm text-gray-900 line-clamp-2">{{ $publication->journal ?: 'N/A' }}</div>
+                        </td>
+                        <td class="px-4 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">{{ $publication->publication_year ?: 'N/A' }}</div>
+                            @if($publication->link)
+                                <a href="{{ $publication->link }}" target="_blank" class="text-[#a53692] hover:text-[#8c2d7c] text-xs font-medium block mt-1">
+                                    View Link
+                                </a>
+                            @endif
+                        </td>
+                        <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <div class="flex flex-col space-y-1 items-end">
+                                <a href="{{ route('admin.publications.edit', $publication) }}" 
+                                   class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-2 py-1 rounded text-xs font-medium transition-colors w-12 text-center">
+                                    Edit
+                                </a>
+                                <button wire:click="confirmDelete({{ $publication->id }})"
+                                        class="bg-red-100 hover:bg-red-200 text-red-700 px-2 py-1 rounded text-xs font-medium transition-colors w-12 text-center">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="px-6 py-12 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <h3 class="text-lg font-medium text-gray-900 mb-1">No publications found</h3>
+                                <p class="text-gray-500 mb-4">Get started by adding your first publication.</p>
+                                <a href="{{ route('admin.publications.add') }}" 
+                                   class="bg-[#a53692] hover:bg-[#8c2d7c] text-white px-4 py-2 rounded-md font-medium transition-colors">
+                                    Add Publication
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mobile Cards (shown on mobile) -->
+    <div class="md:hidden divide-y divide-gray-200">
+        @forelse($publications as $publication)
+            <div class="p-4 hover:bg-gray-50 transition-colors">
+                <!-- Header Section -->
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex-1 min-w-0">
+                        <h3 class="text-sm font-medium text-gray-900 line-clamp-2 mb-1">{{ $publication->title }}</h3>
+                        <div class="flex items-center space-x-3 text-xs text-gray-500">
+                            <span class="font-medium">{{ $publication->doctor->name ?? 'N/A' }}</span>
+                            <span>{{ $publication->publication_year ?: 'N/A' }}</span>
+                        </div>
+                    </div>
+                    @if($publication->link)
+                        <a href="{{ $publication->link }}" target="_blank" class="text-[#a53692] hover:text-[#8c2d7c] ml-2 flex-shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                        </a>
+                    @endif
                 </div>
-            @endif
+                
+                <!-- Details Section -->
+                <div class="space-y-2 text-sm mb-3">
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Authors</div>
+                        <div class="text-gray-900 line-clamp-2">{{ $publication->authors ?: 'N/A' }}</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1">Journal</div>
+                        <div class="text-gray-900 line-clamp-2">{{ $publication->journal ?: 'N/A' }}</div>
+                    </div>
+                </div>
+                
+                <!-- Actions -->
+                <div class="flex justify-end space-x-2 pt-3 border-t border-gray-100">
+                    <a href="{{ route('admin.publications.edit', $publication) }}" 
+                       class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                        Edit
+                    </a>
+                    <button wire:click="confirmDelete({{ $publication->id }})"
+                            class="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        @empty
+            <div class="p-8 text-center">
+                <div class="flex flex-col items-center">
+                    <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <h3 class="text-base font-medium text-gray-900 mb-1">No publications found</h3>
+                    <p class="text-gray-500 mb-4 text-sm">Get started by adding your first publication.</p>
+                    <a href="{{ route('admin.publications.add') }}" 
+                       class="bg-[#a53692] hover:bg-[#8c2d7c] text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                        Add Publication
+                    </a>
+                </div>
+            </div>
+        @endforelse
+    </div>
+
+    <!-- Pagination -->
+    @if($publications->hasPages())
+        <div class="bg-white px-4 py-3 border-t border-gray-200">
+            {{ $publications->links() }}
         </div>
+    @endif
+</div>
     </div>
 </div>

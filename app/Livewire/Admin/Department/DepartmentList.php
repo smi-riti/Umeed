@@ -34,6 +34,7 @@ class DepartmentList extends Component
         }
         $this->resetPage();
     }
+   
 
     public function confirmDelete(int $id): void
     {
