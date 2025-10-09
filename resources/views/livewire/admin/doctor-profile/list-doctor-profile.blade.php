@@ -239,7 +239,11 @@
                                 </td>
                                 <td class="px-4 xl:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <div class="flex items-center justify-end space-x-2">
-                                        <a href="{{ route('admin.doctor-profiles.edit', $profile) }}"
+                                         <a wire:navigate href="{{ route('admin.doctor-profiles.view', $profile) }}"
+                                            class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1 rounded-md text-xs font-medium transition-colors">
+                                            View
+                                        </a>
+                                        <a wire:navigate href="{{ route('admin.doctor-profiles.edit', $profile) }}"
                                             class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1 rounded-md text-xs font-medium transition-colors">
                                             Edit
                                         </a>

@@ -11,11 +11,11 @@
                 </a>
             </nav>
             <nav class="hidden sm:flex items-center space-x-2 text-sm text-gray-500 mb-4">
-                <a href="{{ route('admin.dashboard') }}" class="hover:text-gray-700">Dashboard</a>
+                <a wire:navigate href="{{ route('admin.dashboard') }}" class="hover:text-gray-700">Dashboard</a>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
-                <a href="{{ route('admin.appointments.list') }}" class="text-gray-900">Appointment List</a>
+                <a wire:navigate href="{{ route('admin.appointments.list') }}" class="text-gray-900">Appointment List</a>
                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
@@ -191,7 +191,7 @@
                         <h3 class="text-lg font-medium text-gray-900">Quick Actions</h3>
                     </div>
                     <div class="p-6 space-y-3">
-                        <a href="" 
+                        <a wire:navigate href="{{ route('admin.patients.view', $appointment->patient_id) }}" 
                            class="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -199,7 +199,7 @@
                             View Patient Profile
                         </a>
 
-                        <a href="" 
+                        <a wire:navigate href="{{ route('admin.appointments.list') }}" 
                            class="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -307,7 +307,7 @@
             <h3 class="mt-2 text-sm font-medium text-gray-900">Appointment not found</h3>
             <p class="mt-1 text-sm text-gray-500">The appointment you're looking for doesn't exist.</p>
             <div class="mt-6">
-                <a href="" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                <a wire:navigate href="{{ route('admin.appointments.list') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
                     Back to Appointments
                 </a>
             </div>
