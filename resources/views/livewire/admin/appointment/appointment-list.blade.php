@@ -180,11 +180,14 @@
                                             <option value="cancelled" {{ $appointment->status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                                         </select>
                                     </div>
+                                       <a wire:navigate href="{{ route('admin.appointments.view', $appointment->id) }}" 
+                                       class="text-green-600 hover:text-indigo-900 text-sm">
+                                        View
+                                    </a>
                                     
                                     <!-- Edit Button -->
-                                    <a href="{{ route('admin.appointments.edit', $appointment->id) }}" 
-                                       wire:navigate
-                                       class="text-indigo-600 hover:text-indigo-900 text-sm">
+                                    <a wire:navigate href="{{ route('admin.appointments.edit', $appointment->id) }}" 
+                                                                              class="text-indigo-600 hover:text-indigo-900 text-sm">
                                         Edit
                                     </a>
                                     
@@ -285,9 +288,13 @@
                                     </div>
                                     
                                     <div class="flex space-x-2">
+                                          <!-- Edit Button -->
+                                        <a wire:navigate href="{{ route('admin.appointments.view', $appointment->id) }}" 
+                                           class="text-indigo-600 hover:text-indigo-900 text-xs">
+                                            View
+                                        </a>
                                         <!-- Edit Button -->
-                                        <a href="{{ route('admin.appointments.edit', $appointment->id) }}" 
-                                           wire:navigate
+                                        <a wire:navigate href="{{ route('admin.appointments.edit', $appointment->id) }}" 
                                            class="text-indigo-600 hover:text-indigo-900 text-xs">
                                             Edit
                                         </a>
@@ -397,13 +404,16 @@
                         </div>
                         
                         <div class="flex justify-end space-x-3">
+                            <!-- view Button -->
+                            <a wire:navigate href="{{ route('admin.appointments.view', $appointment->id) }}" 
+                               class="text-green-600 hover:text-indigo-900 text-sm font-medium">
+                                View
+                            </a>
                             <!-- Edit Button -->
-                            <a href="{{ route('admin.appointments.edit', $appointment->id) }}" 
-                               wire:navigate
+                            <a wire:navigate href="{{ route('admin.appointments.edit', $appointment->id) }}" 
                                class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">
                                 Edit
                             </a>
-                            
                             <!-- Delete Button -->
                             <button wire:click="deleteAppointment({{ $appointment->id }})" 
                                     class="text-red-600 hover:text-red-900 text-sm font-medium">

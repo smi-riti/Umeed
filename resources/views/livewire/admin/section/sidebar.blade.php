@@ -2,11 +2,11 @@
     class="fixed h-full w-64 bg-white -translate-x-full lg:translate-x-0 transition-transform duration-150 ease-in-out z-20 border-r border-gray-200 shadow-sm">
     <div class="flex flex-col h-full">
         <!-- Brand/Logo -->
-        <div class="flex items-center justify-center h-20 border-b border-gray-200 px-6 bg-white lg:block hidden">
+        <a wire:navigate href="{{ route('admin.dashboard') }}" class="flex items-center justify-center h-20 border-b border-gray-200 px-6 bg-white lg:block hidden">
             <div class="flex items-center justify-center mt-2">
                 <img src="{{ asset('image.png') }}" alt="Umeed IVF Logo">
             </div>
-        </div>
+        </a>
 
         <!-- Navigation -->
         <div class="flex flex-col flex-1 overflow-y-auto">
@@ -95,16 +95,6 @@
                     </svg>
                     <span class="ml-3 text-sm font-medium">All Appointments</span>
                 </a>
-{{-- 
-                <a wire:navigate href=""
-                    class="group flex items-center px-3 py-3 rounded-lg text-gray-800 hover:bg-[#f9f0f7] hover:text-[#a53692] transition-all">
-                    <svg class="h-5 w-5 text-gray-500 group-hover:text-[#a53692] transition-colors"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span class="ml-3 text-sm font-medium">Pending Appointments</span>
-                </a> --}}
             </nav>
 
             <!-- Communication & Feedback -->

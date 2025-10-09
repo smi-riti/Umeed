@@ -137,4 +137,9 @@ class Doctor extends Model
 
         return $slug;
     }
+     // Relationship with DoctorProfile (one-to-one)
+    public function doctorProfile()
+    {
+        return $this->hasOne(DoctorProfile::class);
+    }
 }

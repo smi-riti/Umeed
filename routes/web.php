@@ -1,6 +1,8 @@
 <?php
 
+use App\Livewire\Admin\AdminProfile\AdminProfile;
 use App\Livewire\Admin\Appointment\ViewAppointment;
+use App\Livewire\Admin\DoctorProfile\ViewDoctorProfile;
 use App\Livewire\Admin\Enquirie\EnquiryList;
 use App\Livewire\Admin\Patient\ManagePatient;
 use App\Livewire\Admin\Patient\ViewPatient;
@@ -89,6 +91,7 @@ Route::post('/logout', function () {
 
 // Admin routes with middleware
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/profile', AdminProfile::class)->name('profile');
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
     // Department routes
@@ -111,6 +114,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/doctor-profiles', ListDoctorProfile::class)->name('doctor-profiles.list');
     Route::get('/doctor-profiles/add', AddDoctorProfile::class)->name('doctor-profiles.add');
     Route::get('/doctor-profiles/edit/{profile}', EditDoctorProfile::class)->name('doctor-profiles.edit');
+    Route::get('/doctors/view/{id}', ViewDoctorProfile::class)->name('doctor-profiles.view');
+
 
     // Publication routes
     Route::get('/publications', ListPublication::class)->name('publications.list');
