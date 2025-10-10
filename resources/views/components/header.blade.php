@@ -19,7 +19,7 @@
             
             <!-- CTA Buttons -->
             <div class="flex items-center md:space-x-4">
-                <a href="tel:+1234567890" class="hidden sm:flex text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">
+                <a href="tel:+917488880400" class="hidden sm:flex text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">
                     📞 Call Now
                 </a>
                 <a href="{{ route('booking') }}" class="bg-[#a53692] text-white px-6 py-2 rounded-md hover:bg-[#8c2b7b] font-medium transition-all duration-300 flex gap-2 text-xs sm:text-base">
@@ -44,7 +44,7 @@
                 <a href="{{ route('services') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('services') ? 'text-[#a53692]' : '' }} transition-colors duration-300">Services</a>
                 <a href="{{ route('contact') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('contact') ? 'text-[#a53692]' : '' }} transition-colors duration-300">Contact</a>
                 <a href="{{ route('booking') }}" class="text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">Book Appointment</a>
-                <a href="tel:+1234567890" class="text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">📞 Call Now</a>
+                <a href="tel:+917488880400" class="text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">📞 Call Now</a>
             </div>
         </div>
     </div>

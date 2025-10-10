@@ -44,8 +44,7 @@
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-lg font-semibold text-gray-900 mb-1">Location</h3>
-                                    <p class="text-gray-600">123 Medical Center Drive</p>
-                                    <p class="text-gray-600">Suite 400, City, State 12345</p>
+                                    <p class="text-gray-600">SANA HEALTH CARE, NOORANI BAGH COLONY, 5B, NEAR SAKKA TOLI MASJID,ALAMGANJ, PATNA - 7</p>
                                 </div>
                             </div>
 
@@ -60,14 +59,13 @@
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-lg font-semibold text-gray-900 mb-1">Phone</h3>
-                                    <p class="text-gray-600">Main: <a href="tel:+15551234567" class="text-[#a53692]">+1
-                                            (555) 123-4567</a></p>
-                                    <p class="text-gray-600">Emergency: <a href="tel:+15551234999" class="text-[#a53692]">+1
-                                            (555) 123-4999</a></p>
+                                    <p class="text-gray-600"><a href="tel:+917488880400" class="text-[#a53692]">+917488880400</a></p>
+                                    {{-- <p class="text-gray-600">Emergency: <a href="tel:+15551234999" class="text-[#a53692]">+1
+                                            (555) 123-4999</a></p> --}}
                                 </div>
                             </div>
 
-                            <div class="flex items-start">
+                            <div class="flex items-start">  
                                 <div class="flex-shrink-0">
                                     <div class="w-12 h-12 bg-[#f9f0f7] rounded-full flex items-center justify-center">
                                         <svg class="w-6 h-6 text-[#a53692]" fill="currentColor" viewBox="0 0 20 20">
@@ -261,21 +259,15 @@
                 </div>
 
                 <div class="h-96 bg-gray-200 rounded-lg overflow-hidden">
-                    <!-- Replace with actual map embed code -->
-                    <div class="w-full h-full flex items-center justify-center bg-gray-300">
-                        <p class="text-gray-600">Map Embed Placeholder</p>
-                        <!-- Actual map embed would go here -->
-                        <!--
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123456.7890123456!2d-123.456789!3d12.3456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDIwJzQ0LjQiTiAxMjPCsDI3JzI0LjQiVw!5e0!3m2!1sen!2sus!4v1631234567890!5m2!1sen!2sus"
-                                width="100%"
-                                height="100%"
-                                style="border:0;"
-                                allowfullscreen=""
-                                loading="lazy">
-                            </iframe>
-                            -->
-                    </div>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.4970817554407!2d85.19245891501287!3d25.612114183702463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed5fe14e5dd001%3A0xd776ec856c8343f5!2sSana%20Health%20Care!5e0!3m2!1sen!2sin!4v1625661234567!5m2!1sen!2sin"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
 
                 <div class="mt-8 grid md:grid-cols-3 gap-8">
@@ -392,8 +384,7 @@
                     <p class="text-gray-600">
                         Have more questions? <a href="{{ route('booking') }}"
                             class="text-[#a53692] font-medium hover:underline">Schedule a consultation</a> or
-                        <a href="tel:+15551234567" class="text-[#a53692] font-medium hover:underline">call us at (555)
-                            123-4567</a>
+                        <a href="tel:+917488880400" class="text-[#a53692] font-medium hover:underline">call us at +917488880400</a>
                     </p>
                 </div>
             </div>

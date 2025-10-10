@@ -222,8 +222,8 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">Call Us</h3>
                     <p class="text-gray-600 mb-6">Speak directly with our patient coordinators to schedule your appointment and ask any questions.</p>
-                    <a href="tel:+15551234567" class="inline-block px-6 py-3 bg-[#a53692] text-white font-medium rounded-md hover:bg-[#8c2b7b] transition-colors">
-                        Call (555) 123-4567
+                    <a href="tel:+917488880400" class="inline-block px-6 py-3 bg-[#a53692] text-white font-medium rounded-md hover:bg-[#8c2b7b] transition-colors">
+                        Call +91 74888 80400
                     </a>
                 </div>
                 
