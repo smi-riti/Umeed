@@ -186,7 +186,7 @@ class AddDoctorProfile extends Component
                     ->map(function($doctor) {
                         return [
                             'id' => $doctor->id,
-                            'name' => $doctor->name,
+                            'name' => $doctor->user->name ?? 'N/A',
                             'email' => $doctor->email,
                             'department' => $doctor->department->name ?? 'N/A'
                         ];

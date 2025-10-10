@@ -28,14 +28,76 @@
             <div class="flex items-center">
                 <img src="{{ asset('image.png') }}" alt="Umeed IVF Logo" class="h-12">
             </div>
-            <div class="w-10 h-10 bg-[#f9f0f7] rounded-full flex items-center justify-center">
-                @auth
-                    <span class="text-[#a53692] font-medium">{{ substr(auth()->user()->name, 0, 1) }}</span>
-                @else
-                    <svg class="h-5 w-5 text-[#a53692]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                @endauth
+            
+            <!-- Mobile User Menu -->
+            <div class="relative" x-data="{ open: false }">
+                <button @click="open = !open" class="flex items-center focus:outline-none">
+                    <div class="w-10 h-10 bg-[#f9f0f7] rounded-full flex items-center justify-center">
+                        @auth
+                            <span class="text-[#a53692] font-medium text-sm">{{ substr(auth()->user()->name, 0, 1) }}</span>
+                        @else
+                            <svg class="h-5 w-5 text-[#a53692]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        @endauth
+                    </div>
+                </button>
+                
+                <!-- Mobile Dropdown Menu -->
+                <div x-show="open" 
+                    @click.away="open = false"
+                    class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-40"
+                    x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="transform opacity-0 scale-95"
+                    x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-75"
+                    x-transition:leave-start="transform opacity-100 scale-100"
+                    x-transition:leave-end="transform opacity-0 scale-95">
+                    <div class="py-1">
+                        <!-- User Info (Mobile) -->
+                        <div class="px-4 py-2 border-b border-gray-100">
+                            <p class="text-sm font-medium text-gray-900">
+                                @auth
+                                    {{ auth()->user()->name ?? 'Admin User' }}
+                                @else
+                                    Admin User
+                                @endauth
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">
+                                @auth
+                                    {{ auth()->user()->email ?? 'admin@umeedivf.com' }}
+                                @else
+                                    admin@umeedivf.com
+                                @endauth
+                            </p>
+                        </div>
+                        
+                        <!-- Profile Link -->
+                        <a wire:navigate href="{{ route('admin.profile') }}" 
+                           class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-[#f9f0f7] hover:text-[#a53692]">
+                            <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            Your Profile
+                        </a>
+                  
+                        
+                        <!-- Divider -->
+                        <div class="border-t border-gray-100 my-1"></div>
+                        
+                        <!-- Logout Button -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" 
+                                    class="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -92,18 +154,30 @@
                                 x-transition:leave-start="transform opacity-100 scale-100"
                                 x-transition:leave-end="transform opacity-0 scale-95">
                                 <div class="py-1">
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#f9f0f7] hover:text-[#a53692]">
-                                        Your Profile
-                                    </a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#f9f0f7] hover:text-[#a53692]">
-                                        Settings
-                                    </a>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button type="submit" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-                                            Logout
-                                        </button>
-                                    </form>
+                                     <!-- Profile Link -->
+                        <a wire:navigate href="{{ route('admin.profile') }}" 
+                           class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-[#f9f0f7] hover:text-[#a53692]">
+                            <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            Your Profile
+                        </a>
+                  
+                        
+                        <!-- Divider -->
+                        <div class="border-t border-gray-100 my-1"></div>
+                        
+                        <!-- Logout Button -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" 
+                                    class="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+                                Logout
+                            </button>
+                        </form>
                                 </div>
                             </div>
                         </div>

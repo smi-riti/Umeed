@@ -52,16 +52,12 @@ class Doctor extends Model
         return $this->hasMany(Publication::class);
     }
     // Accessor for name via user relationship
-    public function getNameAttribute(): string
-    {
-        return $this->user->name ?? '';
-    }
-
+   
     // Accessor for email via user relationship
-    public function getEmailAttribute(): string
-    {
-        return $this->user->email ?? '';
-    }
+    // public function getEmailAttribute(): string
+    // {
+    //     return $this->user->email ?? '';
+    // }
 
     // Get image URL or null
     public function getImageUrlAttribute(): ?string
@@ -140,5 +136,10 @@ class Doctor extends Model
         }
 
         return $slug;
+    }
+     // Relationship with DoctorProfile (one-to-one)
+    public function doctorProfile()
+    {
+        return $this->hasOne(DoctorProfile::class);
     }
 }

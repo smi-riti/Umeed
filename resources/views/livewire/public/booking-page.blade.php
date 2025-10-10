@@ -4,6 +4,7 @@
 
     <!-- Hero Section -->
     <section class="bg-[#f9f0f7] pt-24 pb-16 relative">
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Book an Appointment</h1>
@@ -23,8 +24,13 @@
                 <span class="text-sm font-semibold text-[#a53692] tracking-wider uppercase">Schedule Now</span>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-6">Online Appointment Request</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Complete the steps below and we'll contact you within 24 hours to confirm your appointment
+                    Complete the steps below and we'll contact you within 24 hours to confirm your appointment.
+                    <a wire:navigate href="{{ route('manage-appointment') }}" class="text-[#a53694] hover:underline">Already have an appointment? Check Existing appointment</a>
+
                 </p>
+
+
+
             </div>
             
             <div class="bg-white rounded-lg p-8 shadow-md">
@@ -172,11 +178,8 @@
                             Thank you for submitting your appointment request. We've sent a confirmation email to <span class="font-medium">{{ $email }}</span>. 
                             Our team will contact you within 24 hours to confirm your appointment details.
                         </p>
-                        <div class="border-t border-gray-200 pt-6">
-                            <p class="font-medium mb-2">Reference Number: <span class="text-[#a53692]">{{ $reference_number }}</span></p>
-                            <p class="text-sm text-gray-500 mb-6">Please save this reference number for future communications.</p>
-                            
-                            <a href="{{ route('home') }}" class="inline-block px-6 py-3 bg-[#a53692] text-white font-medium rounded-md hover:bg-[#8c2b7b] transition-colors">
+                        <div class="border-t border-gray-200 pt-6">                            
+                            <a wire:navigate href="{{ route('home') }}" class="inline-block px-6 py-3 bg-[#a53692] text-white font-medium rounded-md hover:bg-[#8c2b7b] transition-colors">
                                 Return to Homepage
                             </a>
                         </div>

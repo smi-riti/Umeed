@@ -5,13 +5,10 @@ namespace App\Livewire\Admin\Appointment;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Patient;
-use App\Models\User;
-use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\On;
+use Livewire\Component;
 
 #[Title('Appointment Form')]
 #[Layout('components.layouts.admin')]
@@ -19,7 +16,7 @@ use Livewire\Attributes\On;
 class AppointmentForm extends Component
 {
     public $appointmentId;
-    
+
     // Patient fields
     public $patient_name = '';
     public $patient_email = '';
@@ -28,7 +25,7 @@ class AppointmentForm extends Component
     public $patient_age = '';
     public $existing_patient_id = '';
     public $use_existing_patient = false;
-    
+
     // Appointment fields
     public $doctor_id = '';
     public $appointment_date = '';
@@ -38,7 +35,7 @@ class AppointmentForm extends Component
 
     protected $rules = [
         'patient_name' => 'required_if:use_existing_patient,false|string|max:255',
-        'patient_email' => 'required_if:use_existing_patient,false|email|max:255',
+        'patient_email' => 'nullable|email|max:255',
         'patient_phone' => 'nullable|string|max:20',
         'patient_gender' => 'nullable|in:male,female,other',
         'patient_age' => 'nullable|integer|min:1|max:150',
@@ -55,7 +52,7 @@ class AppointmentForm extends Component
         if ($appointmentId) {
             $this->appointmentId = $appointmentId;
             $appointment = Appointment::with('patient')->findOrFail($appointmentId);
-            
+
             $this->existing_patient_id = $appointment->patient_id;
             $this->use_existing_patient = true;
             $this->doctor_id = $appointment->doctor_id;
@@ -70,7 +67,7 @@ class AppointmentForm extends Component
 
     public function updatedUseExistingPatient()
     {
-        if (!$this->use_existing_patient) {
+        if (! $this->use_existing_patient) {
             $this->existing_patient_id = '';
         } else {
             $this->resetPatientFields();
@@ -88,18 +85,16 @@ class AppointmentForm extends Component
 
     public function save()
     {
-        // Convert empty age to null before validation
         if ($this->patient_age === '' || $this->patient_age === '0') {
             $this->patient_age = null;
         }
-        
+
         $this->validate();
 
         DB::transaction(function () {
             $patientId = $this->getOrCreatePatient();
-            
+
             if ($this->appointmentId) {
-                // Update existing appointment
                 $appointment = Appointment::findOrFail($this->appointmentId);
                 $appointment->update([
                     'patient_id' => $patientId,
@@ -110,7 +105,6 @@ class AppointmentForm extends Component
                     'status' => $this->status,
                 ]);
             } else {
-                // Create new appointment
                 Appointment::create([
                     'patient_id' => $patientId,
                     'doctor_id' => $this->doctor_id ?: null,
@@ -124,7 +118,6 @@ class AppointmentForm extends Component
         });
 
         session()->flash('message', $this->appointmentId ? 'Appointment updated successfully.' : 'Appointment created successfully.');
-        
         return redirect()->route('admin.appointments.list');
     }
 
@@ -134,41 +127,24 @@ class AppointmentForm extends Component
             return $this->existing_patient_id;
         }
 
-        // Check if user with this email already exists
-        $user = User::where('email', $this->patient_email)->first();
-        
-        if (!$user) {
-            // Create new user with patient role
-            $user = User::create([
-                'name' => $this->patient_name,
-                'email' => $this->patient_email,
-                'password' => Hash::make('password123'), // Default password
-                'role' => 'patient',
-            ]);
-        } else {
-            // Update user role to patient if not already
-            if ($user->role !== 'patient') {
-                $user->update(['role' => 'patient']);
-            }
+        // Check if patient already exists by email
+        $patient = null;
+        if (!empty($this->patient_email)) {
+            $patient = Patient::where('email', $this->patient_email)->first();
         }
 
-        // Check if patient record exists
-        $patient = Patient::where('user_id', $user->id)->first();
-        
-        if (!$patient) {
+        if (! $patient) {
             $patient = Patient::create([
-                'user_id' => $user->id,
                 'name' => $this->patient_name,
-                'email' => $this->patient_email,
+                'email' => $this->patient_email ?: null,
                 'phone' => $this->patient_phone ?: null,
                 'gender' => $this->patient_gender ?: null,
                 'age' => $this->patient_age ?: null,
             ]);
         } else {
-            // Update existing patient
             $patient->update([
                 'name' => $this->patient_name,
-                'email' => $this->patient_email,
+                'email' => $this->patient_email ?: null,
                 'phone' => $this->patient_phone ?: null,
                 'gender' => $this->patient_gender ?: null,
                 'age' => $this->patient_age ?: null,
@@ -181,7 +157,7 @@ class AppointmentForm extends Component
     public function render()
     {
         $doctors = Doctor::with('user', 'department')->get();
-        $patients = Patient::with('user')->get();
+        $patients = Patient::all();
 
         return view('livewire.admin.appointment.appointment-form', [
             'doctors' => $doctors,

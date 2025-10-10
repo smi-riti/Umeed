@@ -45,7 +45,7 @@
                             We're here to help make your dream of parenthood a reality.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button
+                            <a wire:navigate href="{{ route('booking') }}"
                                 class="bg-[#a53692] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md hover:bg-[#8c2b7b] font-medium text-base sm:text-lg transition-all transform hover:-translate-y-1 flex items-center justify-center">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -53,7 +53,7 @@
                                     </path>
                                 </svg>
                                 Book Consultation
-                            </button>
+                            </a>
                             <button
                                 class="border-2 border-[#a53692] text-[#a53692] px-6 sm:px-8 py-3 sm:py-4 rounded-md hover:bg-[#a53692] hover:text-white font-medium text-base sm:text-lg transition-all transform hover:-translate-y-1">
                                 Learn More
@@ -721,8 +721,8 @@
                                     @if ($doctor->image)
                                         <div class="h-64 bg-gray-200">
                                             <img src="{{ asset('storage/' . $doctor->image) }}"
-                                                alt="Dr. {{ $doctor->name }}" class="w-full h-full object-cover"
-                                                onerror="this.src='https://via.placeholder.com/400x400?text=Dr.{{ urlencode($doctor->name) }}';this.onerror='';">
+                                                alt="Dr. {{ $doctor->user->name }}" class="w-full h-full object-cover"
+                                                onerror="this.src='https://via.placeholder.com/400x400?text=Dr.{{ urlencode($doctor->user->name) }}';this.onerror='';">
                                         </div>
                                     @else
                                         <div class="absolute inset-0 flex items-center justify-center">
@@ -752,7 +752,7 @@
                                     </div>
                                     <h3
                                         class="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#a53692] transition-colors">
-                                        {{ $doctor->name }}</h3>
+                                        {{ $doctor->user->name }}</h3>
                                     <p class="text-[#a53692] font-medium mb-2">
                                         {{ $doctor->department->name ?? 'Fertility Specialist' }}</p>
                                     <p class="text-gray-600 text-sm mb-4">
