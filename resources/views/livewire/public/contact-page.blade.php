@@ -382,7 +382,7 @@
 
                 <div class="text-center mt-12">
                     <p class="text-gray-600">
-                        Have more questions? <a href="{{ route('booking') }}"
+                        Have more questions? <a wire:navigate href="{{ route('booking') }}"
                             class="text-[#a53692] font-medium hover:underline">Schedule a consultation</a> or
                         <a href="tel:+917488880400" class="text-[#a53692] font-medium hover:underline">call us at +917488880400</a>
                     </p>

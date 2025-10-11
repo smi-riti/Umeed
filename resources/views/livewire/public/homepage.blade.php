@@ -342,7 +342,7 @@
                                 </div>
 
                                 <div class="pt-4 border-t border-gray-100">
-                                    <a href="#"
+                                    <a wire:navigate href="{{ route('ivf-treatment') }}"
                                         class="inline-flex items-center text-[#a53692] font-medium hover:text-[#8c2b7b] transition-colors">
                                         Learn more about IVF
                                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor"
@@ -425,7 +425,7 @@
                                 </div>
 
                                 <div class="pt-4 border-t border-gray-100">
-                                    <a href="#"
+                                    <a wire:navigate href="{{ route('male-infertility') }}"
                                         class="inline-flex items-center text-[#a53692] font-medium hover:text-[#8c2b7b] transition-colors">
                                         Learn more about male treatments
                                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor"
@@ -506,7 +506,7 @@
                                 </div>
 
                                 <div class="pt-4 border-t border-gray-100">
-                                    <a href="#"
+                                    <a wire:navigate href="{{ route('egg-freezing') }}"
                                         class="inline-flex items-center text-[#a53692] font-medium hover:text-[#8c2b7b] transition-colors">
                                         Learn more about egg freezing
                                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor"
@@ -537,7 +537,7 @@
                                     class="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#a53692] transition-colors">
                                     Embryo Genetic Testing</h4>
                                 <p class="text-gray-600 mb-3">Comprehensive genetic screening for healthier pregnancies</p>
-                                <a href="#"
+                                <a wire:navigate href="{{ route('embryo-genetic') }}"
                                     class="text-[#a53692] font-medium hover:text-[#8c2b7b] inline-flex items-center">
                                     Learn more
                                     <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
@@ -565,7 +565,7 @@
                                 <p class="text-gray-600 mb-3">Egg, sperm, and embryo donor solutions with rigorous
                                     screening
                                 </p>
-                                <a href="#"
+                                <a wire:navigate href="{{ route('donor-programs') }}"
                                     class="text-[#a53692] font-medium hover:text-[#8c2b7b] inline-flex items-center">
                                     Learn more
                                     <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
@@ -580,7 +580,7 @@
 
                     <!-- CTA Button -->
                     <div class="mt-16 text-center">
-                        <a href="#"
+                        <a wire:navigate href="{{ route('services') }}"
                             class="inline-flex items-center bg-white px-8 py-4 border-2 border-[#a53692] text-[#a53692] rounded-full font-medium hover:bg-[#a53692] hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                             Explore All Our Fertility Services
                             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -777,7 +777,7 @@
 
                         <!-- CTA Button -->
                         <div class="mt-12 text-center">
-                            <a href="#"
+                            <a wire:navigate href="{{ route('doctors') }}"
                                 class="inline-flex items-center px-6 py-3 border-2 border-[#a53692] text-[#a53692] rounded-full font-medium hover:bg-[#a53692] hover:text-white transition-all duration-300">
                                 Meet All Our Specialists
                                 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

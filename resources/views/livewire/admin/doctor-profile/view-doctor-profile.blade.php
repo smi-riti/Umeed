@@ -102,14 +102,21 @@
                             <span class="text-gray-900 break-all">{{ $doctor->user->email }}</span>
                         </div>
                         
-                        @if($doctor->doctorProfile && $doctor->doctorProfile->language_spoken)
+                     
+                            <!-- Languages -->
+                    @if ($doctor->profile && $doctor->profile->language_spoken)
                         <div class="flex items-start text-xs md:text-sm">
-                            <svg class="w-4 h-4 text-gray-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <svg class="w-4 h-4 text-gray-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
                             </svg>
-                            <span class="text-gray-900">{{ $doctor->doctorProfile->language_spoken }}</span>
+                            <div class="flex flex-wrap gap-2">
+                                @foreach ($doctor->profile->language_spoken as $language)
+                                    <span>{{ $language }},</span>
+                                @endforeach
+
+                            </div>
                         </div>
-                        @endif
+                    @endif
                     </div>
                 </div>
 
@@ -282,24 +289,42 @@
                                 @endif
 
                                 <!-- Achievements -->
-                                @if($doctor->doctorProfile->achievements)
-                                <div>
-                                    <h3 class="text-base md:text-lg font-medium text-gray-900 mb-3 md:mb-4">Achievements & Awards</h3>
-                                    <div class="bg-gray-50 rounded-lg p-4 md:p-6">
-                                        <p class="text-sm text-gray-700 whitespace-pre-line">{{ $doctor->doctorProfile->achievements }}</p>
-                                    </div>
-                                </div>
+                                @if($doctor->profile && $doctor->profile->achievements)
+                                 <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Achievements & Awards</h3>
+                            <div class="flex flex-wrap gap-2">
+                                @foreach ($doctor->profile->achievements as $achievement)
+                                    <span>{{ $achievement }},</span>
+                                @endforeach
+
+                            </div>
+                        </div>
                                 @endif
 
                                 <!-- Languages -->
-                                @if($doctor->doctorProfile->language_spoken)
+                                {{-- @if($doctor->doctorProfile->language_spoken)
                                 <div>
                                     <h3 class="text-base md:text-lg font-medium text-gray-900 mb-3 md:mb-4">Languages Spoken</h3>
                                     <div class="bg-gray-50 rounded-lg p-4 md:p-6">
                                         <p class="text-sm text-gray-700">{{ $doctor->doctorProfile->language_spoken }}</p>
                                     </div>
                                 </div>
-                                @endif
+                                @endif --}}
+                                  <!-- Languages -->
+                    @if ($doctor->profile && $doctor->profile->language_spoken)
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Languages Spoken</h3>
+                            <div class="flex flex-wrap gap-2">
+                                @foreach ($doctor->profile->language_spoken as $language)
+                                    <span>{{ $language }},</span>
+                                @endforeach
+
+                            </div>
+                        </div>
+
+                            </div>
+                        </div>
+                    @endif
                             @else
                                 <div class="text-center py-8">
                                     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

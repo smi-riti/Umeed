@@ -220,22 +220,22 @@
                             <!-- Founder -->
                             <div class="bg-white rounded-lg overflow-hidden">
                                 <div class="h-64 bg-gray-200">
-                                   <div class="h-64 bg-gray-200 flex items-center justify-center">
-    @if ($doctor->image)
-        <img src="{{ asset('storage/' . $doctor->image) }}" 
-             alt="Dr. {{ $doctor->name }}"
-             class="w-full h-full object-cover"
-             onerror="this.src='https://via.placeholder.com/400x400?text=Dr.+{{ urlencode($doctor->name) }}';this.onerror='';">
-    @else
-        <div class="flex items-center justify-center w-full h-full">
-            <svg class="w-24 h-24 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" 
-                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" 
-                      clip-rule="evenodd" />
-            </svg>
-        </div>
-    @endif
-</div>
+                                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                                        @if ($doctor->image)
+                                            <img src="{{ asset('storage/' . $doctor->image) }}"
+                                                alt="Dr. {{ $doctor->name }}" class="w-full h-full object-cover"
+                                                onerror="this.src='https://via.placeholder.com/400x400?text=Dr.+{{ urlencode($doctor->name) }}';this.onerror='';">
+                                        @else
+                                            <div class="flex items-center justify-center w-full h-full">
+                                                <svg class="w-24 h-24 text-gray-600" fill="currentColor"
+                                                    viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        @endif
+                                    </div>
 
                                 </div>
                                 <div class="p-6">
@@ -352,7 +352,7 @@
                                 consultation at Umeed IVF Hospital. Our team is ready to support you.</p>
                         </div>
                         <div>
-                            <a href="{{ route('booking') }}"
+                            <a wire:navigate href="{{ route('booking') }}"
                                 class="inline-block px-6 py-3 bg-white text-[#a53692] font-medium rounded-md hover:bg-gray-100 transition-colors">
                                 Schedule a Consultation
                             </a>

@@ -21,6 +21,8 @@ class AddDoctorProfile extends Component
     public string $language_spoken = '';
     public array $socialMediaLinks = [];
     public string $experience = '';
+    public string $position = '';
+    public string $university = '';
 
     protected function rules()
     {
@@ -33,8 +35,9 @@ class AddDoctorProfile extends Component
             'special_interest' => 'nullable|string|max:255',
             'achievements' => 'nullable|string|max:1000',
             'language_spoken' => 'nullable|string|max:255',
-            'experience' => 'nullable|string|max:255'
-
+            'experience' => 'nullable|string|max:255',
+            'position' => 'nullable|string|max:255',
+            'university' => 'nullable|string|max:255',
         ];
     }
 
@@ -49,7 +52,8 @@ class AddDoctorProfile extends Component
         'achievements.max' => 'Achievements cannot exceed 1000 characters.',
         'language_spoken.max' => 'Languages spoken cannot exceed 255 characters.',
         'experience.max' => 'Experience cannot exceed 255 characters.',
-    ];
+        'position.max' => 'Position cannot exceed 255 characters.',
+        'university.max' => 'University cannot exceed 255 characters.',];
 
     public function save()
     {
@@ -122,6 +126,9 @@ class AddDoctorProfile extends Component
                 'achievements' => $achievements,
                 'language_spoken' => $languages,
                 'experience' => $this->experience ?: null,
+                'position' => $this->position ?: null,
+                'university' => $this->university ?: null,
+
 
             ]);
 

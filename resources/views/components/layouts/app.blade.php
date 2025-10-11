@@ -6,6 +6,7 @@
         <title>{{ $title ?? 'Page Title' }}</title>
         <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+     
      <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     @livewireStyles
