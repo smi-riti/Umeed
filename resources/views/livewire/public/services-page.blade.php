@@ -58,7 +58,7 @@
                             <span class="text-gray-600">Blastocyst transfer options</span>
                         </li>
                     </ul>
-                    <a href="{{ route('booking') }}" class="inline-flex items-center text-[#a53692] font-medium">
+                    <a wire:navigate href="{{ route('ivf-treatment') }}" class="inline-flex items-center text-[#a53692] font-medium">
                         Learn More
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -95,7 +95,7 @@
                             <span class="text-gray-600">High success rates for male infertility</span>
                         </li>
                     </ul>
-                    <a href="{{ route('booking') }}" class="inline-flex items-center text-[#a53692] font-medium">
+                    <a wire:navigate href="{{ route('icsi-treatment') }}" class="inline-flex items-center text-[#a53692] font-medium">
                         Learn More
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -132,7 +132,7 @@
                             <span class="text-gray-600">Medical and social freezing programs</span>
                         </li>
                     </ul>
-                    <a href="{{ route('booking') }}" class="inline-flex items-center text-[#a53692] font-medium">
+                    <a href="{{ route('egg-freezing') }}" class="inline-flex items-center text-[#a53692] font-medium">
                         Learn More
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -167,7 +167,7 @@
                     <div>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">Male Infertility Treatments</h3>
                         <p class="text-gray-600 mb-4">Comprehensive diagnosis and treatment of male fertility issues, including sperm extraction techniques, hormonal treatments, and surgical solutions.</p>
-                        <a href="{{ route('booking') }}" class="inline-flex items-center text-[#a53692] font-medium">
+                        <a wire:navigate href="{{ route('male-infertility') }}" class="inline-flex items-center text-[#a53692] font-medium">
                             Learn More
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -188,7 +188,7 @@
                     <div>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">Genetic Testing (PGT)</h3>
                         <p class="text-gray-600 mb-4">Preimplantation Genetic Testing to screen embryos for chromosomal abnormalities and genetic conditions before transfer, increasing success rates and healthy pregnancies.</p>
-                        <a href="{{ route('booking') }}" class="inline-flex items-center text-[#a53692] font-medium">
+                        <a wire:navigate href="{{ route('embryo-genetic') }}" class="inline-flex items-center text-[#a53692] font-medium">
                             Learn More
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -209,7 +209,7 @@
                     <div>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">Surrogacy Program</h3>
                         <p class="text-gray-600 mb-4">Our ethical surrogacy program provides comprehensive support for intended parents and surrogates, including legal guidance, medical care, and emotional counseling.</p>
-                        <a href="{{ route('booking') }}" class="inline-flex items-center text-[#a53692] font-medium">
+                        <a wire:navigate href="{{ route('surrogacy') }}" class="inline-flex items-center text-[#a53692] font-medium">
                             Learn More
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -230,7 +230,7 @@
                     <div>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">Fertility Preservation for Cancer Patients</h3>
                         <p class="text-gray-600 mb-4">Specialized rapid-response fertility preservation options for patients facing cancer treatment, including egg freezing, sperm banking, and embryo cryopreservation.</p>
-                        <a href="{{ route('booking') }}" class="inline-flex items-center text-[#a53692] font-medium">
+                        <a wire:navigate href="{{ route('fertility-preservation') }}" class="inline-flex items-center text-[#a53692] font-medium">
                             Learn More
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -267,10 +267,7 @@
                             </div>
                             
                             <div class="flex items-center justify-center z-10 w-12 h-12 bg-[#a53692] rounded-full text-white font-bold">1</div>
-                            
-                            <div class="md:w-1/2 md:pl-12">
-                                <img src="{{ asset('images/consultation.jpg') }}" alt="Initial Consultation" class="rounded-lg w-full" onerror="this.src='https://via.placeholder.com/600x400?text=Initial+Consultation';this.onerror='';">
-                            </div>
+                           
                         </div>
                     </div>
                     
@@ -283,10 +280,7 @@
                             </div>
                             
                             <div class="flex items-center justify-center z-10 w-12 h-12 bg-[#a53692] rounded-full text-white font-bold">2</div>
-                            
-                            <div class="md:w-1/2 md:pr-12">
-                                <img src="{{ asset('images/testing.jpg') }}" alt="Diagnostic Testing" class="rounded-lg w-full" onerror="this.src='https://via.placeholder.com/600x400?text=Diagnostic+Testing';this.onerror='';">
-                            </div>
+                           
                         </div>
                     </div>
                     
@@ -299,10 +293,7 @@
                             </div>
                             
                             <div class="flex items-center justify-center z-10 w-12 h-12 bg-[#a53692] rounded-full text-white font-bold">3</div>
-                            
-                            <div class="md:w-1/2 md:pl-12">
-                                <img src="{{ asset('images/treatment-plan.jpg') }}" alt="Treatment Plan" class="rounded-lg w-full" onerror="this.src='https://via.placeholder.com/600x400?text=Treatment+Plan';this.onerror='';">
-                            </div>
+                           
                         </div>
                     </div>
                     
@@ -315,10 +306,7 @@
                             </div>
                             
                             <div class="flex items-center justify-center z-10 w-12 h-12 bg-[#a53692] rounded-full text-white font-bold">4</div>
-                            
-                            <div class="md:w-1/2 md:pr-12">
-                                <img src="{{ asset('images/treatment.jpg') }}" alt="Treatment Cycle" class="rounded-lg w-full" onerror="this.src='https://via.placeholder.com/600x400?text=Treatment+Cycle';this.onerror='';">
-                            </div>
+                          
                         </div>
                     </div>
                     
@@ -332,9 +320,6 @@
                             
                             <div class="flex items-center justify-center z-10 w-12 h-12 bg-[#a53692] rounded-full text-white font-bold">5</div>
                             
-                            <div class="md:w-1/2 md:pl-12">
-                                <img src="{{ asset('images/monitoring.jpg') }}" alt="Pregnancy Monitoring" class="rounded-lg w-full" onerror="this.src='https://via.placeholder.com/600x400?text=Pregnancy+Monitoring';this.onerror='';">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -401,7 +386,7 @@
                     <p class="text-lg text-white opacity-90">Schedule a consultation with our fertility specialists to discuss which treatment is right for you.</p>
                 </div>
                 <div>
-                    <a href="{{ route('booking') }}" class="inline-block px-6 py-3 bg-white text-[#a53692] font-medium rounded-md hover:bg-gray-100 transition-colors">
+                    <a wire:navigate href="{{ route('booking') }}" class="inline-block px-6 py-3 bg-white text-[#a53692] font-medium rounded-md hover:bg-gray-100 transition-colors">
                         Book a Consultation
                     </a>
                 </div>

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('special_interest')->nullable();
             $table->text('achievements')->nullable();
             $table->string('language_spoken')->nullable();
+            $table->string('position')->nullable();
+            $table->string('university')->nullable();
             $table->timestamps();
         });
     }

@@ -60,6 +60,7 @@
             }
         }
     </script>
+      
     <style>
         /* Custom styles for glassy effects */
         .backdrop-blur-lg {
@@ -82,6 +83,7 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+      
     </style>
 </head>
 <body class="font-sans antialiased bg-white">

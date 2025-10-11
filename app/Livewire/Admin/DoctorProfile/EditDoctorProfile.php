@@ -21,7 +21,10 @@ class EditDoctorProfile extends Component
     public string $achievements = '';
     public string $language_spoken = '';
     public string $experience = '';
+    public string $position = '';
+    public string $university = '';
     public array $socialMediaLinks = [];
+
 
     public $profileId;
 
@@ -36,7 +39,9 @@ class EditDoctorProfile extends Component
             'special_interest' => 'nullable|string|max:255',
             'achievements' => 'nullable|string|max:1000',
             'language_spoken' => 'nullable|string|max:255',
-            'experience' => 'nullable|string|max:255'
+            'experience' => 'nullable|string|max:255',
+            'position' => 'nullable|string|max:255',
+            'university' => 'nullable|string|max:255',
         ];
     }
 
@@ -51,6 +56,8 @@ class EditDoctorProfile extends Component
         'achievements.max' => 'Achievements cannot exceed 1000 characters.',
         'language_spoken.max' => 'Languages spoken cannot exceed 255 characters.',
         'experience.max' => 'Experience cannot exceed 255 characters.',
+        'position.max' => 'Position cannot exceed 255 characters.',
+        'university.max' => 'University cannot exceed 255 characters.',
     ];
 
     public function mount(DoctorProfile $profile)
@@ -62,6 +69,8 @@ class EditDoctorProfile extends Component
         $this->membership = $profile->membership ?? '';
         $this->special_interest = $profile->special_interest ?? '';
         $this->experience = $profile->experience ?? '';
+        $this->position = $profile->position ?? '';
+        $this->university = $profile->university ?? '';
 
         // Parse achievements and languages
         if (is_array($profile->achievements)) {
@@ -155,6 +164,8 @@ class EditDoctorProfile extends Component
             $profile->achievements = $achievements;
             $profile->language_spoken = $languages;
             $profile->experience = $this->experience;
+            $profile->position = $this->position;
+            $profile->university = $this->university;
 
             $profile->save();
             

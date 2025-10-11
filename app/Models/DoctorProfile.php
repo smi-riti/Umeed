@@ -17,12 +17,16 @@ class DoctorProfile extends Model
         'social_media_link',
         'special_interest',
         'achievements',
-        'language_spoken'
+        'language_spoken',
+        'position',
+        'university',
+        'experience',
     ];
 
     protected $casts = [
         'language_spoken' => 'array',
-        'social_media_link' => 'array'
+        'social_media_link' => 'array',
+        'achievements'=> 'array',
     ];
 
     public function publications(): HasMany
