@@ -81,6 +81,7 @@
             <div class="flex items-center md:space-x-4">
                 <a href="tel:+1234567890"
                     class="hidden sm:flex text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">
+                <a href="tel:+917488880400" class="hidden sm:flex text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">
                     📞 Call Now
                 </a>
                 <a wire:navigate href="{{ route('booking') }}"
@@ -130,6 +131,17 @@
                 <a wire:navigate href="{{ route('surrogacy') }}" class="text-gray-600 hover:text-[#a53692] transition-colors duration-300 text-sm">Surrogacy Treatment</a>
                 <a wire:navigate href="{{ route('icsi-treatment') }}" class="text-gray-600 hover:text-[#a53692] transition-colors duration-300 text-sm">ICSI Treatment</a>
                 <a wire:navigate href="{{ route('fertility-preservation') }}" class="text-gray-600 hover:text-[#a53692] transition-colors duration-300 text-sm">Fertility Preservation</a>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden backdrop bg-white shadow-lg pb-6 mt-4">
+            <div class="flex flex-col p-4 space-y-4">
+                <a wire:navigate href="{{ route('home') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('home') ? 'text-[#a53692]' : '' }} transition-colors duration-300">Home</a>
+                <a wire:navigate href="{{ route('about') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('about') ? 'text-[#a53692]' : '' }} transition-colors duration-300">About Us</a>
+                <a wire:navigate href="{{ route('doctors') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('doctors') ? 'text-[#a53692]' : '' }} transition-colors duration-300">Doctors</a>
+                <a wire:navigate href="{{ route('services') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('services') ? 'text-[#a53692]' : '' }} transition-colors duration-300">Services</a>
+                <a wire:navigate href="{{ route('contact') }}" class="text-gray-700 hover:text-[#a53692] font-medium {{ request()->routeIs('contact') ? 'text-[#a53692]' : '' }} transition-colors duration-300">Contact</a>
+                <a wire:navigate href="{{ route('booking') }}" class="text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">Book Appointment</a>
+                <a href="tel:+917488880400" class="text-gray-700 hover:text-[#a53692] font-medium transition-colors duration-300">📞 Call Now</a>
             </div>
         </div>
 

@@ -88,8 +88,8 @@
                                 clip-rule="evenodd" />
                         </svg>
                         <div>
-                            <p>123 Medical Center Drive</p>
-                            <p>Suite 400, City, State 12345</p>
+                            <p>SANA HEALTH CARE, NOORANI BAGH COLONY, 5B,</p>
+                            <p>NEAR SAKKA TOLI MASJID, ALAMGANJ, PATNA - 7</p>
                         </div>
                     </div>
 
@@ -98,7 +98,7 @@
                             <path
                                 d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                         </svg>
-                        <a href="tel:+15551234567" class="hover:text-white transition-colors">+1 (555) 123-4567</a>
+                        <a href="tel:+917488880400" class="hover:text-white transition-colors">+91 74888 80400</a>
                     </div>
 
                     <div class="flex items-center">
